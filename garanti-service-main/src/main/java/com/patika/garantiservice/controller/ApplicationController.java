@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/garanti/v1/applications")
+@RequestMapping("api/garanti/v1/application")
 @RequiredArgsConstructor
 public class ApplicationController {
 
