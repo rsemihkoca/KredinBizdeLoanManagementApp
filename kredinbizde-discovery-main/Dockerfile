@@ -26,7 +26,7 @@ WORKDIR /app
 COPY --from=builder /app/target/kredinbizde-discovery-main.jar /app
 
 # Expose the port the application runs on
-EXPOSE 8080
+EXPOSE 8761
 
 # Set the entry point to execute the jar
 ENTRYPOINT ["java", "-jar", "kredinbizde-discovery-main.jar"]
