@@ -11,7 +11,7 @@ spring:
 
   data:
     mongodb:
-        host: localhost
+        host: ${MONGO_DB_HOST:localhost}
         port: 27017
         database: error-logs
         username: log-consumer
