@@ -18,7 +18,7 @@ public class TransactionProducer {
 
     private final ObjectMapper objectMapper;
 
-    @Value(value = "${spring.kafka.producer.topic}")
+    @Value(value = "${spring.kafka.template.default-topic}")
     private String topicName;
 
     private final KafkaTemplate<String, String> kafkaTemplate;
