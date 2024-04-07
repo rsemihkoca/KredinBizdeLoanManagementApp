@@ -2,11 +2,12 @@ spring:
   application:
     name: logconsumer-service
   kafka:
-    bootstrap-servers: localhost:9092
-    auto-offset-reset: latest
-    group-id: consumer-1
+    consumer:
+      bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+      auto-offset-reset: earliest
+      group-id: consumer-1
     topic:
-      name: kafka-log-topic
+        name: kafka-log-topic
 
   data:
     mongodb:
