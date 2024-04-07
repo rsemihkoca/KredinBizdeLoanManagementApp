@@ -23,10 +23,10 @@ FROM openjdk:21-oracle
 WORKDIR /app
 
 # Copy the packaged jar file from the builder stage
-COPY --from=builder /app/target/garanti-service-main.jar /app
+COPY --from=builder /app/target/akbank-service-main.jar /app
 
 # Expose the port the application runs on
-EXPOSE 5555
+EXPOSE 5556
 
 # Set the entry point to execute the jar
-ENTRYPOINT ["java", "-jar", "garanti-service-main.jar"]
+ENTRYPOINT ["java", "-jar", "akbank-service-main.jar"]
