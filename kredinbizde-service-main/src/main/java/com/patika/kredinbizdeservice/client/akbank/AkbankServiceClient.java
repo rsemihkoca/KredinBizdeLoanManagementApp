@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(value = "akbank-service", url = "localhost:5556")
 public interface AkbankServiceClient extends BankServiceClient {
 
-    @PostMapping("api/akbank/v1/applications")
+    @PostMapping("api/akbank/v1/application")
     ApplicationResponse createApplication(@RequestBody BankApplicationRequest request);
 }
