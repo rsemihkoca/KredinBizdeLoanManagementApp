@@ -1,27 +1,11 @@
 spring:
   application:
     name: gateway-service-main
-  cloud:
-    gateway:
-      routes:
-#        - id: application-service
-#          uri: lb://application-service
-#          predicates:
-#            - Path=/api/v1/application/**
-        - id: user-service
-          uri: lb://user-service
-          predicates:
-            - Path=/api/v1/user/**
-      discovery:
-        locator:
-          enabled: true
 server:
   port: 8888
-
 eureka:
   client:
     register-with-eureka: true
+    fetch-registry: true
     service-url:
       defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka}
-  instance:
-    prefer-ip-address: true
