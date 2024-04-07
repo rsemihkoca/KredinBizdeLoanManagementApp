@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/kredinbizde-service-main/kredinbizde-service.iml" filepath="$PROJECT_DIR$/kredinbizde-service-main/kredinbizde-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/logconsumer-service-main/logconsumer-service-main.iml" filepath="$PROJECT_DIR$/logconsumer-service-main/logconsumer-service-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notification-service-main/notification-service.iml" filepath="$PROJECT_DIR$/notification-service-main/notification-service.iml" />
+    </modules>
+  </component>
+</project>
