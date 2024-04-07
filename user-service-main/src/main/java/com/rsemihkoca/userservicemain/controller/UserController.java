@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping("api/v1/user")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -21,17 +21,17 @@ public class UserController {
         return userService.createUser(request);
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<User>> getAll() {
         return ResponseEntity.ok(userService.getAll());
     }
 
-    @GetMapping("{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<User> getById(@PathVariable("userId") String userId) {
         return ResponseEntity.ok(userService.getById(userId));
     }
 
-    @GetMapping("errorTest")
+    @GetMapping("/errorTest")
     public ResponseEntity<List<User>> testKafka() {
         throw new RuntimeException("test exception");
     }
