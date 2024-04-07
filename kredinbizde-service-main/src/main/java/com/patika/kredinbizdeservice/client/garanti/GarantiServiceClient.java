@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(value = "garanti-service", url = "localhost:5555")
 public interface GarantiServiceClient extends BankServiceClient {
 
-    @PostMapping("api/garanti/v1/applications")
+    @PostMapping("api/garanti/v1/application")
     ApplicationResponse createApplication(@RequestBody BankApplicationRequest request);
 }
