@@ -4,11 +4,12 @@
 
 - Bir uygulama için service katmanına tüm gerekli senaryolar için unit test yazın. `(20 PUAN)(Daha fazla yapan bonus 10 PUAN)`
 
-- Tüm uygulamaları tek bir repo haline getirin.`(5 PUAN)`
+- Tüm uygulamaları tek bir repo haline getirin.bu repo içerisinde ilgili bütün servisler olmalı. Gw, discovery servis ve diğer servisler`(5 PUAN)`
 
-- Dokümantasyon ekleyin. `(20 PUAN)`
+- Dokümantasyon ekleyin. projeye dökümantasyon ekleyin. Swagger, read.me dosyası, mimari çizim, servislerin
+  endpointleri`(20 PUAN)`
 
-- Best practices, isimlendirme kurallarına uyum. `(10 PUAN)`
+- Best practices, isimlendirme kurallarına uyum. Unit test isimlendirme`(10 PUAN)`
 
 - Uygulamanın doğru çalışması. `(15 PUAN)`
 
