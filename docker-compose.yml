@@ -219,6 +219,7 @@ services:
       - kafka
     environment:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - MONGO_DB_HOST=mongodb
 
   #    environment:
   #        - KAFKA_SERVER_URL=kafka:9092
