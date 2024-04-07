@@ -23,10 +23,10 @@ FROM openjdk:21-oracle
 WORKDIR /app
 
 # Copy the packaged jar file from the builder stage
-COPY --from=builder /app/target/kredinbizde-service-main.jar /app
+COPY --from=builder /app/target/user-service-main.jar /app
 
 # Expose the port the application runs on
-EXPOSE 8080
+EXPOSE 8081
 
 # Set the entry point to execute the jar
-ENTRYPOINT ["java", "-jar", "kredinbizde-service-main.jar"]
+ENTRYPOINT ["java", "-jar", "user-service-main.jar"]
