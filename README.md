@@ -16,8 +16,8 @@
 ## BONUS
 - Uygulamaların dockerize edilmesi ve docker compose dosyası yazılması. `(10 PUAN)`
 
-- Design Pattern kullanımı. `(10 PUAN)`
-
+- Design Pattern kullanımı. `(10 PUAN)`\
+- servisleri docker içine taşıdıktan sonra bir türlü davranış değişmiyorsa image'i silmek gerekli Örneğin gateway bir türlü bağlayamadıysanız ve intellij kullanıyorsanız services altındaki images temizlemek çözüm olabilir. veya endpointleri temizlediğinizde swagger'a yansımıyorsa aynı şekilde imajları temizlemek çözüm olabilir.
 ---
 *Eğitmen - Cem DIRMAN*  
 *Kolay Gelsin*
