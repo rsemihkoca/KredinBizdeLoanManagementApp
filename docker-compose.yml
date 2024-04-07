@@ -1,0 +1,106 @@
+version: '3.1'
+services:
+
+  zookeeper:
+    image: wurstmeister/zookeeper:latest
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: wurstmeister/kafka:latest
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+  init-kafka:
+    image: confluentinc/cp-kafka:6.1.1
+    depends_on:
+      - kafka
+    entrypoint: [ '/bin/sh', '-c' ]
+    command: |
+      "
+      # blocks until kafka is reachable
+      kafka-topics --bootstrap-server localhost:9092 --list
+
+      echo -e 'Creating kafka topics'
+      kafka-topics --bootstrap-server localhost:9092 --create --if-not-exists --topic kafka-log-topic --replication-factor 1 --partitions 1
+
+      echo -e 'Successfully created the following topics:'
+      kafka-topics --bootstrap-server localhost:9092 --list
+      "
+  #
+  #  kafka-manager:
+  #    image: hlebalbau/kafka-manager:stable
+  #    container_name: kafka-manager
+  #    ports:
+  #      - "9000:9000"
+  #    environment:
+  #      ZK_HOSTS: "zookeeper:2181"
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq/
+    networks:
+      - spring-boot
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: 123456
+
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./initialize-mongo.js:/docker-entrypoint-initdb.d/01_initialize-mongo.js:ro
+    networks:
+      - mongo-compose-network
+
+#  mongo-express:
+#    container_name: mongo-express
+#    image: mongo-express:0.54.0
+#    depends_on:
+#      - mongodb
+#    networks:
+#      - mongo-compose-network
+#    environment:
+#      - ME_CONFIG_MONGODB_SERVER=mongodb
+#      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+#      - ME_CONFIG_MONGODB_ADMINPASSWORD=example
+#      - ME_CONFIG_BASICAUTH_USERNAME=log-consumer
+#      - ME_CONFIG_BASICAUTH_PASSWORD=example
+#    ports:
+#      - '8081:8081'
+#    volumes:
+#      - ./data:/data/db
+
+
+volumes:
+  mongodb_data:
+networks:
+  mongo-compose-network:
+    driver: bridge
+  spring-boot:
+    driver: bridge

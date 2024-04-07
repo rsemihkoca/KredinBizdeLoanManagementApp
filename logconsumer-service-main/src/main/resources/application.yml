@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: logconsumer-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    auto-offset-reset: latest
+    group-id: consumer-1
+    topic:
+      name: kafka-log-topic
+
+  data:
+    mongodb:
+        host: localhost
+        port: 27017
+        database: error-logs
+        username: log-consumer
+        password: example
+
+server:
+    port: 8084

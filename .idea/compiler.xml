@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="kredinbizde-discovery" />
+        <module name="akbank-service" />
+        <module name="kredinbizde-service" />
+        <module name="logconsumer-service-main" />
+        <module name="garanti-service" />
+        <module name="notification-service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="akbank-service" options="-parameters" />
+      <module name="garanti-service" options="-parameters" />
+      <module name="kredinbizde-discovery" options="-parameters" />
+      <module name="kredinbizde-service" options="-parameters" />
+      <module name="logconsumer-service-main" options="-parameters" />
+      <module name="notification-service" options="-parameters" />
+    </option>
+  </component>
+</project>
