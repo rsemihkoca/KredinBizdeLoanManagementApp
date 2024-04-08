@@ -1,28 +1,25 @@
-package com.patika.kredinbizdeservice.model;
+package com.rsemihkoca.userservicemain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.rsemihkoca.userservicemain.model.Constants.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
+import java.io.Serializable;
+
 @Entity
-@Table(name = "address")
-public class Address {
+@Data
+@Table(name = addressTable.TABLE_NAME)
+public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = addressTable.ADDRESS_ID)
+    private Long addressId;
 
-    @Column(name = "address_title")
+    @Column(name = addressTable.ADDRESS_TITLE)
     private String addressTitle;
 
-    @Column(name = "address_description")
+    @Column(name = addressTable.ADDRESS_DESCRIPTION)
     private String addressDescription;
-
-    @Column(name = "province")
-    private String province;
 
 }
