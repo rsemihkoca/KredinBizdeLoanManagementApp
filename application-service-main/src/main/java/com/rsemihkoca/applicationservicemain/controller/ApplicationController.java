@@ -1,4 +1,4 @@
-package com.patika.kredinbizdeservice.controller;
+package com.rsemihkoca.applicationservicemain.controller;
 
 import com.patika.kredinbizdeservice.dto.request.ApplicationRequest;
 import com.patika.kredinbizdeservice.model.Application;
@@ -22,6 +22,8 @@ public class ApplicationController {
     public ResponseEntity<Application> createApplication(@RequestBody ApplicationRequest request) {
         return ResponseEntity.ok().body(applicationService.createApplication(request));
     }
+
+    // get application of user by email
 
     @GetMapping("/{email}")
     public ResponseEntity<List<Application>> getAll(@PathVariable String email) {
