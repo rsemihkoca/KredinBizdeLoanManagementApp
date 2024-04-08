@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-import static com.rsemihkoca.userservicemain.model.Constants.*;
+import static com.rsemihkoca.applicationservicemain.model.Constants.*;
 
 @Entity
 @Data
