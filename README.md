@@ -18,6 +18,20 @@
 
 - Design Pattern kullanımı. `(10 PUAN)`\
 - servisleri docker içine taşıdıktan sonra bir türlü davranış değişmiyorsa image'i silmek gerekli Örneğin gateway bir türlü bağlayamadıysanız ve intellij kullanıyorsanız services altındaki images temizlemek çözüm olabilir. veya endpointleri temizlediğinizde swagger'a yansımıyorsa aynı şekilde imajları temizlemek çözüm olabilir.
+- kafka'yı bu makaleye borçluyum: https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
+
+- Api gateway:
+```shell
+➜  week-4-rsemihkoca git:(main) ✗ curl -X 'GET' \
+  'http://localhost:8081/api/v1/user/' \
+  -H 'accept: */*'
+[{"userId":"1","name":"Cem","age":30},{"userId":"2","name":"Cem","age":25},{"userId":"3","name":"Cem","age":28},{"userId":"4","name":"Cem","age":27},{"userId":"5","name":"Semih","age":24}]%                      
+➜  week-4-rsemihkoca git:(main) ✗ curl -X 'GET' \
+  'http://localhost:8888/api/v1/user/' \
+  -H 'accept: */*'
+[{"userId":"1","name":"Cem","age":30},{"userId":"2","name":"Cem","age":25},{"userId":"3","name":"Cem","age":28},{"userId":"4","name":"Cem","age":27},{"userId":"5","name":"Semih","age":24}]%  
+```
+
 ---
 *Eğitmen - Cem DIRMAN*  
 *Kolay Gelsin*
