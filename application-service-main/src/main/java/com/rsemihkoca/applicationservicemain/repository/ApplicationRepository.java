@@ -1,27 +1,17 @@
-package com.patika.kredinbizdeservice.repository;
+package com.rsemihkoca.applicationservicemain.repository;
 
-import com.patika.kredinbizdeservice.model.Application;
+import com.rsemihkoca.applicationservicemain.model.User;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 @Repository
-@Scope(value = "singleton")
-public class ApplicationRepository {
+public interface ApplicationRepository extends JpaRepository<User, Long> {
 
-    private List<Application> applicationList = new ArrayList<>();
 
-    public Application save(Application application) {
-        applicationList.add(application);
-        return application;
-    }
-
-    public List<Application> getAll(String email) {
-
-        return applicationList.stream()
-                .filter(application -> application.getUser().getEmail().equals(email))
-                .toList();
-    }
 }
