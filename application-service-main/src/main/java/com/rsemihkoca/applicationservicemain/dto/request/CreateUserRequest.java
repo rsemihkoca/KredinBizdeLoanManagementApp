@@ -1,4 +1,4 @@
-package com.rsemihkoca.applicationservicemain.exceptions.dto.request;
+package com.rsemihkoca.applicationservicemain.dto.request;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
