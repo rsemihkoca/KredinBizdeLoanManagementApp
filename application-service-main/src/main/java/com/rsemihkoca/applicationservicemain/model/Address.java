@@ -1,6 +1,6 @@
 package com.rsemihkoca.applicationservicemain.model;
 
-import com.rsemihkoca.userservicemain.model.Constants.*;
+import com.rsemihkoca.applicationservicemain.model.Constants.*;
 import jakarta.persistence.*;
 import lombok.Data;
 
