@@ -1,6 +1,6 @@
-package com.patika.kredinbizdeservice.producer.dto;
+package com.rsemihkoca.applicationservicemain.producer.dto;
 
-import com.patika.kredinbizdeservice.producer.enums.NotificationType;
+import com.rsemihkoca.applicationservicemain.enums.NotificationType;
 import lombok.*;
 
 @Getter
