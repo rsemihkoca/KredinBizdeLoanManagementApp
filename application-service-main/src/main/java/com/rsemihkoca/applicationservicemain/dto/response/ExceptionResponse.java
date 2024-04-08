@@ -1,4 +1,4 @@
-package com.rsemihkoca.applicationservicemain.dto;
+package com.rsemihkoca.applicationservicemain.dto.response;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;
