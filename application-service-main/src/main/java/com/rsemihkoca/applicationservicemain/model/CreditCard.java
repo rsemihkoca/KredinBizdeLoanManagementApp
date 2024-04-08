@@ -1,4 +1,4 @@
-package com.patika.kredinbizdeservice.model;
+package com.rsemihkoca.applicationservicemain.model;
 
 import java.math.BigDecimal;
 import java.util.List;
