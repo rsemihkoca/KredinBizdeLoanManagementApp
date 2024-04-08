@@ -1,4 +1,4 @@
-package com.rsemihkoca.applicationservicemain.client.dto.response;
+package com.rsemihkoca.applicationservicemain.enums;
 
 public enum ApplicationStatus {
 
