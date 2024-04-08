@@ -2,6 +2,27 @@ version: '3.8'
 
 services:
 
+  redis:
+    image: redis:latest
+    container_name: redis
+    networks:
+      - spring-boot
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  redis-ui:
+    image: redis/redisinsight:latest
+    container_name: redis-insight
+    restart: always
+    networks:
+        - spring-boot
+    ports:
+      - "5540:5540"
+    volumes:
+      - redis-insight:/data
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
@@ -47,8 +68,8 @@ services:
     ports:
       - 8090:8080
     networks:
-        - spring-boot
-        - rmoff_kafka
+      - spring-boot
+      - rmoff_kafka
     environment:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
@@ -147,6 +168,8 @@ services:
     environment:
       - EUREKA_SERVER_URL=http://kredinbizde-discovery:8761/eureka
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
       - MYSQL_DB_HOST=mysql-user-service
 
   
@@ -167,18 +190,6 @@ services:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - MONGO_DB_HOST=mongodb
 
-  #    environment:
-  #        - KAFKA_SERVER_URL=kafka:9092
-  #        - MONGO_SERVER=mongodb
-  #        - MONGO_PORT=27017
-  #        - MONGO_DB_NAME=error-logs
-  #        - MONGO_DB_USERNAME=log-consumer
-  #        - MONGO_DB_PASSWORD=example
-  #      mongodb:
-  #        condition: service_healthy
-  #      kafka:
-  #        condition: service_healthy
-
 
   mysql-user-service:
     image: mysql:8.0
@@ -197,9 +208,10 @@ services:
 volumes:
   mongodb_data:
   mysql_data:
+  redis_data:
+  redis-insight:
 networks:
   rmoff_kafka:
     name: rmoff_kafka
-
   spring-boot:
     driver: bridge
