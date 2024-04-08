@@ -1,6 +1,6 @@
 package com.rsemihkoca.applicationservicemain.repository;
 
-import com.rsemihkoca.userservicemain.model.*;
+import com.rsemihkoca.applicationservicemain.model.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
