@@ -1,9 +1,8 @@
 package com.rsemihkoca.applicationservicemain.client.akbank;
 
-import com.patika.kredinbizdeservice.client.BankServiceClient;
-import com.patika.kredinbizdeservice.client.dto.request.BankApplicationRequest;
-import com.patika.kredinbizdeservice.client.dto.response.ApplicationResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.rsemihkoca.applicationservicemain.client.BankServiceClient;
+import com.rsemihkoca.applicationservicemain.dto.request.BankApplicationRequest;
+import com.rsemihkoca.applicationservicemain.dto.response.ApplicationResponse;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,11 +10,6 @@ public class AkbankClient implements BankServiceClient {
 
     private final AkbankServiceClient feignClient;
 
-    public AkbankClient() {
-        this.feignClient = null;
-    }
-
-    @Autowired
     public AkbankClient(AkbankServiceClient feignClient) {
         this.feignClient = feignClient;
     }
