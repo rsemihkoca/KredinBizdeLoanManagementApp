@@ -1,4 +1,4 @@
-package com.patika.kredinbizdeservice.configuration;
+package com.rsemihkoca.applicationservicemain.configuration;
 
 
 import lombok.Data;
@@ -10,6 +10,7 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 
 @Configuration
 @Data
