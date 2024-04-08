@@ -1,5 +1,6 @@
-package com.rsemihkoca.applicationservicemain.client.dto.response;
+package com.rsemihkoca.applicationservicemain.dto.response;
 
+import com.rsemihkoca.applicationservicemain.enums.ApplicationStatus;
 import lombok.*;
 
 import java.time.LocalDateTime;
