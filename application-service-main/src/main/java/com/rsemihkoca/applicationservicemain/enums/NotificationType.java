@@ -1,4 +1,4 @@
-package com.patika.kredinbizdeservice.producer.enums;
+package com.rsemihkoca.applicationservicemain.enums;
 
 public enum NotificationType {
 
