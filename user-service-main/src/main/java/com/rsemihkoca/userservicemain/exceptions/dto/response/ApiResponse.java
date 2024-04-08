@@ -1,2 +1,16 @@
-package com.rsemihkoca.userservicemain.exceptions.dto.response;public class ApiResponse {
+package com.rsemihkoca.userservicemain.exceptions.dto.response;
+
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+@Data
+public class ApiResponse<T> {
+    private boolean success;
+    private String message;
+    private T data;
+
 }
