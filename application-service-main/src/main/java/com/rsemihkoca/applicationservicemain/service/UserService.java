@@ -1,10 +1,10 @@
 package com.rsemihkoca.applicationservicemain.service;
 
-import com.rsemihkoca.userservicemain.exceptions.dto.request.CreateUserRequest;
-import com.rsemihkoca.userservicemain.exceptions.dto.response.UserResponse;
-import com.rsemihkoca.userservicemain.model.Constants;
-import com.rsemihkoca.userservicemain.model.User;
-import com.rsemihkoca.userservicemain.repository.UserRepository;
+import com.rsemihkoca.applicationservicemain.dto.request.CreateUserRequest;
+import com.rsemihkoca.applicationservicemain.dto.response.UserResponse;
+import com.rsemihkoca.applicationservicemain.model.Constants;
+import com.rsemihkoca.applicationservicemain.model.User;
+import com.rsemihkoca.applicationservicemain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
