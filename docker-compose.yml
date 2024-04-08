@@ -103,9 +103,9 @@ services:
       - spring-boot
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8761/actuator/health" ]
-      interval: 5s
+      interval: 10s
       retries: 3
-      timeout: 2s
+      timeout: 5s
 
   gateway-service-main:
     image: gateway-service-main:latest
@@ -151,7 +151,26 @@ services:
         condition: service_healthy
     environment:
       - EUREKA_SERVER_URL=http://kredinbizde-discovery:8761/eureka
-  
+
+  application-service-main:
+    image: application-service-main:latest
+    build:
+      context: ./application-service-main
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-boot
+      - rmoff_kafka
+    depends_on:
+      kredinbizde-discovery:
+        condition: service_healthy
+    environment:
+      - EUREKA_SERVER_URL=http://kredinbizde-discovery:8761/eureka
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - MYSQL_DB_HOST=mysql-application-service
+
+
   user-service-main:
     image: user-service-main:latest
     build:
@@ -190,6 +209,19 @@ services:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - MONGO_DB_HOST=mongodb
 
+  mysql-application-service:
+    image: mysql:8.0
+    container_name: mysql-application-service
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: test
+    ports:
+      - "3305:3306"
+    volumes:
+      - mysql_appl_data:/var/lib/mysql
+    networks:
+      - spring-boot
 
   mysql-user-service:
     image: mysql:8.0
@@ -201,13 +233,45 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mysql_user_data:/var/lib/mysql
     networks:
       - spring-boot
 
+  mysql-akbank-service:
+    image: mysql:8.0
+    container_name: mysql-akbank-service
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: test
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_akbank_data:/var/lib/mysql
+    networks:
+      - spring-boot
+
+  mysql-garanti-service:
+    image: mysql:8.0
+    container_name: mysql-garanti-service
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: test
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_garanti_data:/var/lib/mysql
+    networks:
+      - spring-boot
+
+
 volumes:
   mongodb_data:
-  mysql_data:
+  mysql_user_data:
+  mysql_appl_data:
+  mysql_akbank_data:
+  mysql_garanti_data:
   redis_data:
   redis-insight:
 networks:
