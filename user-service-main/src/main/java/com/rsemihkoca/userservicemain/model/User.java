@@ -1,20 +1,34 @@
 package com.rsemihkoca.userservicemain.model;
 
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
+import static com.rsemihkoca.userservicemain.model.Constants.*;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Entity
 @Data
-public class User {
+@Table(name = userTable.TABLE_NAME)
+public class User implements Serializable {
 
-    private String userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = userTable.USER_ID)
+    private Long userId;
+
+    @Column(name = userTable.NAME, unique = false, nullable = false)
     private String name;
+
+    @Column(name = userTable.AGE, unique = false, nullable = false)
     private Integer age;
 
+    @Column(name = userTable.EMAIL, unique = true, nullable = false)
+    private String email;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = addressTable.ADDRESS_ID, nullable = true, unique = false)
+    private Address address;
 }
+
