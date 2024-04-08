@@ -1,4 +1,4 @@
-package com.patika.kredinbizdeservice.model;
+package com.rsemihkoca.applicationservicemain.model;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
