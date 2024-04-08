@@ -1,9 +1,9 @@
 package com.rsemihkoca.applicationservicemain.controller;
 
 
-import com.rsemihkoca.userservicemain.exceptions.dto.request.CreateUserRequest;
-import com.rsemihkoca.userservicemain.exceptions.dto.response.UserResponse;
-import com.rsemihkoca.userservicemain.service.UserService;
+import com.rsemihkoca.applicationservicemain.dto.request.CreateUserRequest;
+import com.rsemihkoca.applicationservicemain.dto.response.UserResponse;
+import com.rsemihkoca.applicationservicemain.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
