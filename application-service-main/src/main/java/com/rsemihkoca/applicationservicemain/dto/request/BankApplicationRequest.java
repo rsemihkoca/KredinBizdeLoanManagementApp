@@ -1,4 +1,4 @@
-package com.rsemihkoca.applicationservicemain.client.dto.request;
+package com.rsemihkoca.applicationservicemain.dto.request;
 
 import lombok.*;
 
