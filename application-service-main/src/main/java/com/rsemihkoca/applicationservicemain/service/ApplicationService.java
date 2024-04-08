@@ -1,4 +1,4 @@
-package com.patika.kredinbizdeservice.service;
+package com.rsemihkoca.applicationservicemain.service;
 
 import com.patika.kredinbizdeservice.client.BankClientFactory;
 import com.patika.kredinbizdeservice.client.BankServiceClient;
