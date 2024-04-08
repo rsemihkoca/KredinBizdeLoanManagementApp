@@ -1,7 +1,7 @@
 package com.rsemihkoca.applicationservicemain.service;
 
-import com.rsemihkoca.userservicemain.model.*;
-import com.rsemihkoca.userservicemain.repository.UserRepository;
+import com.rsemihkoca.applicationservicemain.model.*;
+import com.rsemihkoca.applicationservicemain.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
