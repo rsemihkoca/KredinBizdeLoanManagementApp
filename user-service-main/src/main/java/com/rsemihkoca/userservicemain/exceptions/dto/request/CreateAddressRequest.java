@@ -1,19 +1,20 @@
 package com.rsemihkoca.userservicemain.exceptions.dto.request;
 
 import com.rsemihkoca.userservicemain.model.Address;
+import com.rsemihkoca.userservicemain.model.Constants;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class CreateUserRequest {
+public class CreateAddressRequest {
 
-    private String name;
+    private String addressTitle;
 
-    private Integer age;
-
-    private String email;
-
-    private Address address;
+    private String addressDescription;
 
 }
