@@ -1,4 +1,4 @@
-package com.patika.kredinbizdeservice.converter;
+package com.rsemihkoca.applicationservicemain.converter;
 
 import com.patika.kredinbizdeservice.dto.request.ApplicationRequest;
 import com.patika.kredinbizdeservice.enums.ApplicationStatus;
