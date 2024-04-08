@@ -2,8 +2,9 @@ package com.rsemihkoca.userservicemain.exceptions.dto.response;
 
 import lombok.Data;
 
+
 @Data
-public class UserResponse {
+public class UserResponse implements java.io.Serializable{
 
     private String name;
 
