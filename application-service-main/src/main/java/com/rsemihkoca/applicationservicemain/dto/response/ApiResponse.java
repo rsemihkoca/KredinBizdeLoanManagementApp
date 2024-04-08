@@ -1,4 +1,4 @@
-package com.rsemihkoca.applicationservicemain.exceptions.dto.response;
+package com.rsemihkoca.applicationservicemain.dto.response;
 
 
 import lombok.Data;
