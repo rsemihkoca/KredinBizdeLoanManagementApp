@@ -3,6 +3,7 @@ package com.rsemihkoca.userservicemain.service;
 import com.rsemihkoca.userservicemain.model.*;
 import com.rsemihkoca.userservicemain.repository.UserRepository;
 import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +11,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Component
-@Log
+@Slf4j
 public class DataInitializer implements CommandLineRunner {
-
-    private final Logger logger = Logger.getLogger(DataInitializer.class.getName());
 
     private final UserRepository userRepository;
 
@@ -27,10 +26,10 @@ public class DataInitializer implements CommandLineRunner {
 
         List<User> users = userRepository.findAll();
         if (!users.isEmpty()) {
-            logger.info("Data already initialized");
+            log.info("Data already initialized");
             return;
         } else {
-            logger.info("Data is empty, initializing data");
+            log.info("Data is empty, initializing data");
             User user1 = new User();
             Address address1 = new Address();
             address1.setAddressTitle("EV");
@@ -91,7 +90,7 @@ public class DataInitializer implements CommandLineRunner {
 
             userRepository.save(user5);
 
-            logger.info("Data initialized");
+            log.info("Data initialized");
         }
 
     }
