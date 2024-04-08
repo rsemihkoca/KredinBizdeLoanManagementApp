@@ -1,4 +1,4 @@
-package com.patika.kredinbizdeservice.dto.request;
+package com.rsemihkoca.applicationservicemain.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
