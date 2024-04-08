@@ -1,19 +1,27 @@
-package com.rsemihkoca.userservicemain;
+package com.rsemihkoca.userservicemain.model;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Constants {
 
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class userTable {
-        public static final String NAME = "name";
-        public static final String SURNAME = "surname";
-        public static final String BIRTH_DATE = "birth_date";
-        public static final String EMAIL = "email";
-        public static final String PASSWORD = "password";
-        public static final String PHONE_NUMBER = "phone_number";
-        public static final String IS_ACTIVE = "is_active";
-        public static final String ADDRESS = "address_id";
+        public static final String TABLE_NAME = "USER";
+        public static final String USER_ID = "USER_ID";
+        public static final String NAME = "NAME";
+        public static final String EMAIL = "EMAIL";
+        public static final String AGE = "AGE";
+    }
+
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class addressTable {
+        public static final String TABLE_NAME = "ADDRESS";
+        public static final String ADDRESS_ID = "ADDRESS_ID";
+        public static final String ADDRESS_TITLE = "ADDRESS_TITLE";
+        public static final String ADDRESS_DESCRIPTION = "ADDRESS_DESCRIPTION";
     }
 }
