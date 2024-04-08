@@ -1,8 +1,8 @@
 package com.rsemihkoca.applicationservicemain.client;
 
-import com.patika.kredinbizdeservice.client.garanti.GarantiClient;
-import com.patika.kredinbizdeservice.client.akbank.AkbankClient;
-import com.patika.kredinbizdeservice.enums.BankType;
+import com.rsemihkoca.applicationservicemain.client.akbank.AkbankClient;
+import com.rsemihkoca.applicationservicemain.client.garanti.GarantiClient;
+import com.rsemihkoca.applicationservicemain.enums.BankType;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
