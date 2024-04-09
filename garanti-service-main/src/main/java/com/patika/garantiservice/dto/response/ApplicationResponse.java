@@ -1,6 +1,6 @@
 package com.patika.garantiservice.dto.response;
 
-import com.patika.garantiservice.enums.ApplicationStatus;
+import com.patika.garantiservice.enums.BankApplicationStatus;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -15,5 +15,5 @@ public class ApplicationResponse {
 
     private Long userId;
     private LocalDateTime createDate;
-    private ApplicationStatus applicationStatus;
+    private BankApplicationStatus applicationStatus;
 }
