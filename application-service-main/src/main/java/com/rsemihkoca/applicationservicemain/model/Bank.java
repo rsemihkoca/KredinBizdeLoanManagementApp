@@ -1,34 +1,24 @@
 package com.rsemihkoca.applicationservicemain.model;
 
+import jakarta.persistence.*;
+import lombok.Data;
+import com.rsemihkoca.applicationservicemain.model.Constants.*;
 import java.util.List;
 
-public class Bank {
+@Data
+@Entity
+@Table(name = bankTable.TABLE_NAME)
+public class Bank implements java.io.Serializable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = bankTable.BANK_ID)
+    private Long bankId;
+
+    @Column(name = bankTable.NAME, unique = true, nullable = false)
     private String name;
+
+    @OneToMany()
+    @JoinColumn(name = loanTable.LOAN_ID)
     private List<Loan> loanList;
-    private List<CreditCard> creditCards;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Loan> getLoanList() {
-        return loanList;
-    }
-
-    public void setLoanList(List<Loan> loanList) {
-        this.loanList = loanList;
-    }
-
-    @Override
-    public String toString() {
-        return "Bank{" +
-                "name='" + name + '\'' +
-                ", loanList=" + loanList +
-                '}';
-    }
 }
