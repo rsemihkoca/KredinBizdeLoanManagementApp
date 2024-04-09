@@ -10,6 +10,9 @@ import java.io.Serializable;
 
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = applicationTable.TABLE_NAME)
 public class Application implements Serializable {
 
