@@ -30,6 +30,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    @Cacheable(value = Constants.userTable.TABLE_NAME, key = "#email")
+    public UserResponse getByEmail(String email) {
+        User getUser = userRepository.getUserByEmail(email);
+        log.info("User with " + email + " retrieved from database");
+        UserResponse userResponse = modelMapper.map(getUser, UserResponse.class);
+        return userResponse;
+    }
+
     @CacheEvict(value = Constants.userTable.TABLE_NAME, allEntries = true)
     public UserResponse createUser(CreateUserRequest user) {
         User userEntity = modelMapper.map(user, User.class);
@@ -46,11 +54,6 @@ public class UserService {
     @Cacheable(value = Constants.userTable.TABLE_NAME)
     public List<UserResponse> getAll() {
         List<User> users = userRepository.findAll();
-
-        //                .toList(); When you call toList() and then serialize the object, the collection type simply disappears.
-//                Jackson expects to see a string (VALUE STRING) with a collection type, but receives the beginning of an object (OBJECT_VALUE)
-//
-//        log.info("All users retrieved from database");
         return users.stream()
                 .map(user -> modelMapper.map(user, UserResponse.class))
                 .collect(Collectors.toList());
