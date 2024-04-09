@@ -13,5 +13,6 @@ public class ApplicationRequest {
 
     private String email;
     private String bankName;
+    private String loanType;
 
 }
