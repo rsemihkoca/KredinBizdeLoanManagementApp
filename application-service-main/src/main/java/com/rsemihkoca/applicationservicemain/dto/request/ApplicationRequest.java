@@ -1,18 +1,20 @@
 package com.rsemihkoca.applicationservicemain.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
-@Getter
-@Setter
+
 @AllArgsConstructor
-@NoArgsConstructor
+@Data
+@Builder
 public class ApplicationRequest {
 
+    @NotBlank(message = "Name cannot be blank")
     private String email;
-    private String bankName;
-    private String loanType;
 
+    @NotBlank(message = "Bank cannot be blank")
+    private String bankName;
+
+    @NotBlank(message = "LoanId cannot be blank")
+    private Long loanId;
 }
