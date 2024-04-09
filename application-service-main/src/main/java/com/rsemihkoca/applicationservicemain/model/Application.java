@@ -1,37 +1,36 @@
 package com.rsemihkoca.applicationservicemain.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.patika.kredinbizdeservice.enums.ApplicationStatus;
+import com.rsemihkoca.applicationservicemain.enums.ApplicationStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import com.rsemihkoca.applicationservicemain.model.Constants.*;
 
 import java.io.Serializable;
 
-@ToString
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity
-@Table(name = "application")
-public class Application extends Audit implements Serializable {
+@Table(name = applicationTable.TABLE_NAME)
+public class Application implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = applicationTable.APPLICATION_ID)
+    private Long applicationId;
 
-   /* @OneToOne
-    @JoinColumn(name = "loan_id")
-    private Loan loan;*/
+    @OneToOne
+    @JoinColumn(name = loanTable.LOAN_ID, unique = true)
+    private Loan loan;
 
-    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = userTable.USER_ID, nullable = false)
     private User user;
 
+    @Column(name = applicationTable.IS_ACTIVE, columnDefinition = "boolean default false")
+    private boolean isActive;
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "application_status")
+    @Column(name = applicationTable.APPLICATION_STATUS)
     private ApplicationStatus applicationStatus;
 
 }
