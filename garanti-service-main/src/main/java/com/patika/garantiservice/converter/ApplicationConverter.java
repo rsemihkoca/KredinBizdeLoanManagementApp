@@ -3,7 +3,7 @@ package com.patika.garantiservice.converter;
 import com.patika.garantiservice.dto.request.ApplicationRequest;
 import com.patika.garantiservice.dto.response.ApplicationResponse;
 import com.patika.garantiservice.entity.Application;
-import com.patika.garantiservice.enums.ApplicationStatus;
+import com.patika.garantiservice.enums.BankApplicationStatus;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -14,13 +14,11 @@ import java.util.List;
 public class ApplicationConverter {
 
     public Application toApplication(ApplicationRequest request) {
-        // @formatter:off
-        return Application.builder()
-                .userId(request.getUserId())
-                .createDate(LocalDateTime.now())
-                .applicationStatus(ApplicationStatus.INITIAL)
-                .build();
-        // @formatter:on
+        Application application = new Application();
+        application.setUserId(request.getUserId());
+        application.setCreateDate(LocalDateTime.now());
+        application.setApplicationStatus(BankApplicationStatus.RECEIVED);
+        return application;
     }
 
     public ApplicationResponse toResponse(Application application) {
@@ -41,3 +39,4 @@ public class ApplicationConverter {
         return applicationResponses;
     }
 }
+
