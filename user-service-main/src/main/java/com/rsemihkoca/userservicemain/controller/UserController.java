@@ -24,6 +24,11 @@ public class UserController {
         return ResponseEntity.ok(userService.createUser(request));
     }
 
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UserResponse> getByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(userService.getByEmail(email));
+    }
+
     @GetMapping("/")
     public ResponseEntity<List<UserResponse>> getAll() {
         return ResponseEntity.ok(userService.getAll());
