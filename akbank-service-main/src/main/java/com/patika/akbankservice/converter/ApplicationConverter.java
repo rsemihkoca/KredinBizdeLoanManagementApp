@@ -3,7 +3,7 @@ package com.patika.akbankservice.converter;
 import com.patika.akbankservice.dto.request.ApplicationRequest;
 import com.patika.akbankservice.dto.response.ApplicationResponse;
 import com.patika.akbankservice.entity.Application;
-import com.patika.akbankservice.enums.ApplicationStatus;
+import com.patika.akbankservice.enums.BankApplicationStatus;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -14,13 +14,11 @@ import java.util.List;
 public class ApplicationConverter {
 
     public Application toApplication(ApplicationRequest request) {
-        // @formatter:off
-        return Application.builder()
-                .userId(request.getUserId())
-                .createDate(LocalDateTime.now())
-                .applicationStatus(ApplicationStatus.INITIAL)
-                .build();
-        // @formatter:on
+        Application application = new Application();
+        application.setUserId(request.getUserId());
+        application.setCreateDate(LocalDateTime.now());
+        application.setApplicationStatus(BankApplicationStatus.RECEIVED);
+        return application;
     }
 
     public ApplicationResponse toResponse(Application application) {
