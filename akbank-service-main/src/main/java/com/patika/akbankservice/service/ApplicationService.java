@@ -14,26 +14,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ApplicationService {
 
-    private ApplicationRepository applicationRepository = new ApplicationRepository();
+    private ApplicationRepository applicationRepository;
 
     private final ApplicationConverter applicationConverter;
 
-    /*
-    public ApplicationService(ApplicationConverter applicationConverter) {
-        this.applicationConverter = applicationConverter;
-    }*/
 
     public ApplicationResponse createApplication(ApplicationRequest request) {
-
         Application application = applicationConverter.toApplication(request);
-
         return applicationConverter.toResponse(applicationRepository.save(application));
     }
 
-
     public List<ApplicationResponse> getAll() {
-        List<Application> applications = applicationRepository.getAll();
-
+        List<Application> applications = applicationRepository.findAll();
         return applicationConverter.toResponseList(applications);
     }
 }
