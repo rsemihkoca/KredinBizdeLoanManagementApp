@@ -1,5 +1,6 @@
 package com.rsemihkoca.applicationservicemain.configuration;
 
+import com.rsemihkoca.applicationservicemain.client.akbank.AkbankServiceClient;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration.AccessLevel;
 import org.modelmapper.convention.MatchingStrategies;
@@ -13,6 +14,7 @@ import java.time.Duration;
 
 @Configuration
 public class BeanConfiguration {
+
 
     @Bean
     public ModelMapper modelMapper() {
