@@ -17,6 +17,7 @@ public class GarantiClient implements BankServiceClient {
     public GarantiClient(GarantiServiceClient feignClient) {
         this.feignClient = feignClient;
     }
+
     @Override
     public ApplicationResponse createApplication(BankApplicationRequest request) {
         if (feignClient == null) {
