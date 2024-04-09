@@ -18,7 +18,6 @@ public class Bank implements java.io.Serializable{
     @Column(name = bankTable.NAME, unique = true, nullable = false)
     private String name;
 
-    @OneToMany()
-    @JoinColumn(name = loanTable.LOAN_ID)
-    private List<Loan> loanList;
+    @OneToMany(mappedBy="bank", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Loan> loans;
 }
