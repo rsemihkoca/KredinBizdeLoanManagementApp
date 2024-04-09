@@ -5,13 +5,9 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 @Builder
-public class ApplicationResponse {
+@Data
+public class ApplicationResponse implements java.io.Serializable{
 
     private Long userId;
     private LocalDateTime createDate;
