@@ -5,12 +5,10 @@ import com.rsemihkoca.applicationservicemain.service.BankService;
 import com.rsemihkoca.applicationservicemain.service.LoanService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import com.rsemihkoca.applicationservicemain.enums.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Component
@@ -28,7 +26,6 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        // delete all data before initializing
         loanService.deleteAll();
         bankService.deleteAll();
         CompletableFuture<Boolean> bankCreationFuture = CompletableFuture.supplyAsync(() -> {
