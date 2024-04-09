@@ -28,6 +28,8 @@ public final class Constants {
         public static final String TABLE_NAME = "LOAN";
         public static final String LOAN_ID = "LOAN_ID";
         public static final String AMOUNT = "AMOUNT";
+        public static final String DURATION = "DURATION";
+        public static final String INTEREST_RATE = "INTEREST_RATE";
         public static final String LOAN_TYPE = "LOAN_TYPE";
 
     }
