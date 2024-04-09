@@ -16,19 +16,21 @@ public class Loan implements java.io.Serializable {
     @Column(name = loanTable.LOAN_ID)
     private Long loanId;
 
-    @Column(name = loanTable.AMOUNT, nullable = false)
+    @Column(name = loanTable.AMOUNT,unique = false, nullable = false)
     private BigDecimal amount;
 
+    @Column(name = loanTable.DURATION, unique = false, nullable = false)
+    private Integer duration;
+
+    @Column(name = loanTable.INTEREST_RATE, unique = false, nullable = false)
+    private BigDecimal interestRate;
+
     @Enumerated(EnumType.STRING)
-    @Column(name = loanTable.LOAN_TYPE)
+    @Column(name = loanTable.LOAN_TYPE, unique = false, nullable = false)
     private LoanType loanType;
 
-    @OneToOne()
-    @JoinColumn(name = applicationTable.APPLICATION_ID, unique = true)
-    private Application application;
-
-    @OneToOne()
-    @JoinColumn(name = bankTable.BANK_ID, unique = true)
+    @ManyToOne
+    @JoinColumn(name=bankTable.BANK_ID, nullable=false)
     private Bank bank;
 
 }
