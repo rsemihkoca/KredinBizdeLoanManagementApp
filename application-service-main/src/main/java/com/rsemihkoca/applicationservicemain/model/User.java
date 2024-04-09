@@ -1,34 +1,28 @@
 package com.rsemihkoca.applicationservicemain.model;
 
-
+import com.rsemihkoca.applicationservicemain.enums.LoanType;
 import jakarta.persistence.*;
 import lombok.Data;
+import com.rsemihkoca.applicationservicemain.model.Constants.*;
+import java.math.BigDecimal;
 
-import java.io.Serializable;
-
-import static com.rsemihkoca.applicationservicemain.model.Constants.*;
-
-@Entity
 @Data
-@Table(name = userTable.TABLE_NAME)
-public class User implements Serializable {
+@Entity
+@Table(name = loanTable.TABLE_NAME)
+public class Loan implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = userTable.USER_ID)
-    private Long userId;
+    private Long loanId;
 
-    @Column(name = userTable.NAME, unique = false, nullable = false)
-    private String name;
+    @OneToOne(mappedBy = loanTable.TABLE_NAME)
+    private Application application;
 
-    @Column(name = userTable.AGE, unique = false, nullable = false)
-    private Integer age;
-
-    @Column(name = userTable.EMAIL, unique = true, nullable = false)
-    private String email;
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = addressTable.ADDRESS_ID, nullable = true, unique = false)
-    private Address address;
+    private BigDecimal amount;
+    private Integer installment;
+    private Bank bank;
+    private Double interestRate;
+    private LoanType loanType;
 }
+
 
