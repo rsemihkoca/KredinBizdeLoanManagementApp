@@ -131,11 +131,13 @@ services:
       - "5555:5555"
     networks:
       - spring-boot
+      - garanti-service-network
     depends_on:
       kredinbizde-discovery:
         condition: service_healthy
     environment:
       - EUREKA_SERVER_URL=http://kredinbizde-discovery:8761/eureka
+      - MYSQL_DB_HOST=mysql-garanti-service
 
   akbank-service-main:
     image: akbank-service-main:latest
@@ -146,11 +148,13 @@ services:
       - "5556:5556"
     networks:
       - spring-boot
+      - akbank-service-network
     depends_on:
       kredinbizde-discovery:
         condition: service_healthy
     environment:
       - EUREKA_SERVER_URL=http://kredinbizde-discovery:8761/eureka
+      - MYSQL_DB_HOST=mysql-akbank-service
 
   application-service-main:
     image: application-service-main:latest
@@ -162,6 +166,7 @@ services:
     networks:
       - spring-boot
       - rmoff_kafka
+      - application-service-network
     depends_on:
       kredinbizde-discovery:
         condition: service_healthy
@@ -181,6 +186,7 @@ services:
     networks:
       - spring-boot
       - rmoff_kafka
+      - user-service-network
     depends_on:
       kredinbizde-discovery:
         condition: service_healthy
@@ -221,7 +227,8 @@ services:
     volumes:
       - mysql_appl_data:/var/lib/mysql
     networks:
-      - spring-boot
+      - application-service-network
+    entrypoint: [ "docker-entrypoint.sh", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci" ]
 
   mysql-user-service:
     image: mysql:8.0
@@ -235,7 +242,8 @@ services:
     volumes:
       - mysql_user_data:/var/lib/mysql
     networks:
-      - spring-boot
+      - user-service-network
+    entrypoint: [ "docker-entrypoint.sh", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci" ]
 
   mysql-akbank-service:
     image: mysql:8.0
@@ -249,7 +257,8 @@ services:
     volumes:
       - mysql_akbank_data:/var/lib/mysql
     networks:
-      - spring-boot
+      - akbank-service-network
+    entrypoint: [ "docker-entrypoint.sh", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci" ]
 
   mysql-garanti-service:
     image: mysql:8.0
@@ -263,7 +272,8 @@ services:
     volumes:
       - mysql_garanti_data:/var/lib/mysql
     networks:
-      - spring-boot
+      - garanti-service-network
+    entrypoint: [ "docker-entrypoint.sh", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci" ]
 
 
 volumes:
@@ -275,6 +285,18 @@ volumes:
   redis_data:
   redis-insight:
 networks:
+  application-service-network:
+    name: application-service-network
+    driver: bridge
+  user-service-network:
+    name: user-service-network
+    driver: bridge
+  garanti-service-network:
+    name: garanti-service-network
+    driver: bridge
+  akbank-service-network:
+    name: akbank-service-network
+    driver: bridge
   rmoff_kafka:
     name: rmoff_kafka
   spring-boot:
