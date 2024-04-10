@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.time.LocalDateTime;
+
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
@@ -40,9 +42,9 @@ public class GlobalExceptionHandler {
         return Transaction.builder()
                 .errorMessage(exception.getMessage())
                 .sender("user-service-main")
-                .httpStatus(HttpStatus.BAD_REQUEST)
-                .statusCode(String.valueOf(HttpStatus.BAD_REQUEST.value()))
-                .timestamp(System.currentTimeMillis())
+                .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                .statusCode(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
+                .timestamp(LocalDateTime.now().toString())
                 .build();
     }
 
