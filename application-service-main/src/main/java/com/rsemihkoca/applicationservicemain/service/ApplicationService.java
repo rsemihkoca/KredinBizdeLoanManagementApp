@@ -2,7 +2,6 @@ package com.rsemihkoca.applicationservicemain.service;
 
 
 import com.rsemihkoca.applicationservicemain.client.BankServiceClient;
-//import com.rsemihkoca.applicationservicemain.client.userservice.UserClient;
 import com.rsemihkoca.applicationservicemain.client.userservice.UserServiceClient;
 import com.rsemihkoca.applicationservicemain.dto.request.BankApplicationRequest;
 import com.rsemihkoca.applicationservicemain.dto.response.UserResponse;
@@ -11,7 +10,6 @@ import com.rsemihkoca.applicationservicemain.enums.BankType;
 import com.rsemihkoca.applicationservicemain.enums.NotificationType;
 import com.rsemihkoca.applicationservicemain.model.Application;
 import com.rsemihkoca.applicationservicemain.model.Loan;
-import com.rsemihkoca.applicationservicemain.model.User;
 import com.rsemihkoca.applicationservicemain.producer.dto.NotificationDTO;
 import com.rsemihkoca.applicationservicemain.repository.ApplicationRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.rsemihkoca.applicationservicemain.dto.request.ApplicationRequest;
 import com.rsemihkoca.applicationservicemain.client.ClientFactory;
-import com.rsemihkoca.applicationservicemain.producer.NotificationProducer;
 
 import java.io.Serializable;
 import java.util.List;
@@ -35,19 +32,18 @@ public class ApplicationService {
     private final LoanService loanService;
     private final UserServiceClient userServiceClient;
     private final ClientFactory clientFactory;
-    private final NotificationProducer notificationProducer;
     private final ModelMapper modelMapper;
 
     public Application createApplication(ApplicationRequest request) {
 
-        User userEntity = getUser(request);
+        String userEmail = getUser(request);
         log.info("User found");
 
         Loan loan = getLoan(request);
         log.info("Loan found");
 
         Application newApplicatin = Application.builder()
-                .user(userEntity)
+                .userEmail(userEmail)
                 .loan(loan)
                 .isActive(true)
                 .applicationStatus(ApplicationStatus.IN_PROGRESS)
@@ -55,8 +51,7 @@ public class ApplicationService {
 
         Application savedApplication = applicationRepository.save(newApplicatin);
 
-        sendApplication(request, userEntity);
-        sendNotification(savedApplication);
+//        sendNotification(savedApplication);
 
         return savedApplication;
     }
@@ -70,37 +65,27 @@ public class ApplicationService {
         return loan;
     }
 
-    private User getUser(ApplicationRequest request) {
-        User userEntity;
+    private String getUser(ApplicationRequest request) {
         String email = request.getEmail();
         ResponseEntity<UserResponse> user = userServiceClient.getByEmail(email);
-
         if (user.getBody() == null) {
             throw new RuntimeException("User not found");
-        } else {
-            userEntity = modelMapper.map(user.getBody(), User.class);
         }
-        return userEntity;
+        return user.getBody().getEmail();
     }
 
-    private void sendApplication(ApplicationRequest request, User user) {
-        BankType bankType = BankType.valueOf(request.getBankName().toUpperCase());
-        BankServiceClient bankServiceClient = clientFactory.createBankClient(bankType);
-        BankApplicationRequest bankApplicationRequest = new BankApplicationRequest();
-        bankApplicationRequest.setUserId(user.getUserId());
-        bankServiceClient.createApplication(bankApplicationRequest);
-    }
 
-    private void sendNotification(Application application) {
-        NotificationDTO notificationDTO = getNotification(application);
-        notificationProducer.sendNotification(notificationDTO);
-    }
+
+//    private void sendNotification(Application application) {
+//        NotificationDTO notificationDTO = getNotification(application);
+//        notificationProducer.sendNotification(notificationDTO);
+//    }
 
     private NotificationDTO getNotification(Application application) {
         return NotificationDTO.builder()
                 .notificationType(NotificationType.EMAIL)
                 .message("Kredi başvurunuz alınmıştır. Başvuru durumunuzu takip edebilirsiniz.")
-                .email(application.getUser().getEmail())
+                .email(application.getUserEmail())
                 .build();
     }
 
