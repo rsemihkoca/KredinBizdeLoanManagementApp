@@ -13,10 +13,13 @@
         <option value="$PROJECT_DIR$/user-service-main/pom.xml" />
         <option value="$PROJECT_DIR$/gateway-service-main/pom.xml" />
         <option value="$PROJECT_DIR$/application-service-main/pom.xml" />
+        <option value="$PROJECT_DIR$/bank-service-main/pom.xml" />
+        <option value="$PROJECT_DIR$/garanti-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/garanti-service/pom.xml" />
         <option value="$PROJECT_DIR$/kredinbizde-service-main/pom.xml" />
       </set>
     </option>
