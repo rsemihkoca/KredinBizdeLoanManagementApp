@@ -1,4 +1,4 @@
-package com.rsemihkoca.garantiservice.dto.response;
+package com.rsemihkoca.applicationservicemain.dto.response;
 
 
 import lombok.AllArgsConstructor;
