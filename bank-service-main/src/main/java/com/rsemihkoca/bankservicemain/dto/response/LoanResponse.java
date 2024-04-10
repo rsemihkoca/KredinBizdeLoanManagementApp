@@ -1,10 +1,8 @@
-package com.rsemihkoca.akbankservice.dto.response;
+package com.rsemihkoca.bankservicemain.dto.response;
 
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 @ToString
@@ -13,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class LoanResponse implements Serializable {
 
+    private Long loanId;
 
     private String type;
 
