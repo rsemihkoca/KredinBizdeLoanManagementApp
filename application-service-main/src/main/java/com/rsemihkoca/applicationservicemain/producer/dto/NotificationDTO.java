@@ -12,6 +12,6 @@ public class NotificationDTO {
 
     private NotificationType notificationType;
     private String message;
-    private String email;
+    private String channel;
 
 }
