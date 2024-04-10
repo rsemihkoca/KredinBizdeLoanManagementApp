@@ -1,9 +1,7 @@
-package com.rsemihkoca.akbankservice.producer.dto;
+package com.rsemihkoca.bankservicemain.producer.dto;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;
-
-import java.time.LocalDateTime;
 
 
 @AllArgsConstructor
