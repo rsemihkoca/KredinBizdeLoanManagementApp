@@ -1,6 +1,23 @@
 server:
   port: '5555'
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  health:
+    kafka:
+      enabled: true
+    mysql:
+      enabled: true
+    defaults:
+      enabled: false
 spring:
+  cloud:
+    discovery:
+      client:
+        composite-indicator:
+          enabled: false
   application:
     name: garanti-service
   datasource:
@@ -8,14 +25,23 @@ spring:
     username: root
     password: example
     url: jdbc:mysql://${MYSQL_DB_HOST:localhost}:3306/test?allowPublicKeyRetrieval=true&useSSL=false
-
+  kafka:
+    producer:
+      acks: -1
+      bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    template:
+      default-topic: kafka-log-topic
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     generate-ddl: true
     show-sql: true
     properties:
       hibernate.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST:localhost}
+      port: ${SPRING_REDIS_PORT:6379}
 eureka:
   client:
     serviceUrl:
