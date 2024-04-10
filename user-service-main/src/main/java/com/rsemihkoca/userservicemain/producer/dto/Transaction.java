@@ -3,6 +3,11 @@ package com.rsemihkoca.userservicemain.producer.dto;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 
+import lombok.*;
+import org.springframework.http.HttpStatus;
+
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -13,5 +18,5 @@ public class Transaction {
     private String sender;
     private String statusCode;
     private HttpStatus httpStatus;
-    private long timestamp;
+    private String timestamp;
 }
