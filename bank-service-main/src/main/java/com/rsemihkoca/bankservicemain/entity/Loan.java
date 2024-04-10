@@ -1,49 +1,33 @@
-package com.rsemihkoca.akbankservice.entity;
+package com.rsemihkoca.bankservicemain.entity;
 
 
-import com.rsemihkoca.akbankservice.enums.LoanType;
-import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import  com.rsemihkoca.akbankservice.entity.Constants.*;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import lombok.*;
 
-
-@Entity
 @Data
-@Table(name = LoanTable.TABLE_NAME)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Loan implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = LoanTable.ID)
-    private Long id;
+    private String bank;
 
+    private String createDate;
 
-    @Column(name = LoanTable.CREATE_DATE)
-    private LocalDateTime createDate;
+    private String updateDate;
 
-    @Column(name = LoanTable.UPDATE_DATE)
-    private LocalDateTime updateDate;
+    private String type;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = LoanTable.TYPE, length = 50)
-    private LoanType type;
-
-    @Column(name = LoanTable.AMOUNT)
     private Double amount;
 
-    @Column(name = LoanTable.INTEREST_RATE)
     private Double interestRate;
 
-    @Column(name = LoanTable.DURATION)
     private Integer duration;
 
 }
