@@ -1,11 +1,11 @@
-package com.rsemihkoca.akbankservice.healthCheck;
+package com.rsemihkoca.bankservicemain.healthCheck;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.health.ConditionalOnEnabledHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Component
 @ConditionalOnEnabledHealthIndicator("kafka")
