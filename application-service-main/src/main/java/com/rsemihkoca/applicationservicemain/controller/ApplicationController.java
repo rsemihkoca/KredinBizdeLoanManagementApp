@@ -1,6 +1,8 @@
 package com.rsemihkoca.applicationservicemain.controller;
 
 import com.rsemihkoca.applicationservicemain.dto.request.ApplicationRequest;
+import com.rsemihkoca.applicationservicemain.dto.response.ApplicationResponse;
+import com.rsemihkoca.applicationservicemain.dto.response.GenericResponse;
 import com.rsemihkoca.applicationservicemain.dto.response.UserResponse;
 import com.rsemihkoca.applicationservicemain.model.Application;
 import com.rsemihkoca.applicationservicemain.service.ApplicationService;
@@ -20,24 +22,22 @@ public class ApplicationController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Application> createApplication(@RequestBody ApplicationRequest request) {
-        return ResponseEntity.ok().body(applicationService.createApplication(request));
+    public ResponseEntity<GenericResponse<ApplicationResponse>> createApplication(@RequestBody ApplicationRequest request) {
+        return ResponseEntity.ok(GenericResponse.success(applicationService.createApplication(request)));
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<List<Application>> getByEmail(@PathVariable String email) {
-        return ResponseEntity.ok().body(applicationService.getByEmail(email));
+    public ResponseEntity<GenericResponse<List<ApplicationResponse>> getByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(GenericResponse.success(applicationService.getByEmail(email)));
     }
 
-
     @GetMapping("/")
-    public ResponseEntity<List<Application>> getAll() {
-        return ResponseEntity.ok().body(applicationService.getAll());
+    public ResponseEntity<GenericResponse<List<ApplicationResponse>> getAll() {
+        return ResponseEntity.ok(GenericResponse.success(applicationService.getAll()));
     }
 
     @GetMapping("/errorTest")
-    public ResponseEntity<List<UserResponse>> testKafka() {
+    public ResponseEntity<GenericResponse<ApplicationResponse>> testKafka() {
         throw new RuntimeException("test exception");
     }
-
 }
