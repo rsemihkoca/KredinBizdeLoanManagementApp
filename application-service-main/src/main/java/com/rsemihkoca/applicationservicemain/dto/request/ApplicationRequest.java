@@ -12,9 +12,6 @@ public class ApplicationRequest {
     @NotBlank(message = "Name cannot be blank")
     private String email;
 
-    @NotBlank(message = "Bank cannot be blank")
-    private String bankName;
-
     @NotBlank(message = "LoanId cannot be blank")
     private Long loanId;
 }
