@@ -14,4 +14,7 @@ public class ApplicationRequest {
 
     @NotBlank(message = "LoanId cannot be blank")
     private Long loanId;
+
+    @NotBlank(message = "Bank cannot be blank")
+    private String bankName;
 }
