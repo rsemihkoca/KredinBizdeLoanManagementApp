@@ -1,15 +1,17 @@
 package com.rsemihkoca.applicationservicemain.service;
 
 
-import com.rsemihkoca.applicationservicemain.client.BankServiceClient;
+import com.rsemihkoca.applicationservicemain.client.bankservice.BankServiceClient;
 import com.rsemihkoca.applicationservicemain.client.userservice.UserServiceClient;
-import com.rsemihkoca.applicationservicemain.dto.request.BankApplicationRequest;
+import com.rsemihkoca.applicationservicemain.dto.response.ApplicationResponse;
+import com.rsemihkoca.applicationservicemain.dto.response.GenericResponse;
+import com.rsemihkoca.applicationservicemain.dto.response.MergedLoanResponse;
 import com.rsemihkoca.applicationservicemain.dto.response.UserResponse;
 import com.rsemihkoca.applicationservicemain.enums.ApplicationStatus;
-import com.rsemihkoca.applicationservicemain.enums.BankType;
+import com.rsemihkoca.applicationservicemain.enums.NotificationContent;
 import com.rsemihkoca.applicationservicemain.enums.NotificationType;
 import com.rsemihkoca.applicationservicemain.model.Application;
-import com.rsemihkoca.applicationservicemain.model.Loan;
+import com.rsemihkoca.applicationservicemain.producer.NotificationProducer;
 import com.rsemihkoca.applicationservicemain.producer.dto.NotificationDTO;
 import com.rsemihkoca.applicationservicemain.repository.ApplicationRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +20,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.rsemihkoca.applicationservicemain.dto.request.ApplicationRequest;
-import com.rsemihkoca.applicationservicemain.client.ClientFactory;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,40 +30,47 @@ import java.util.List;
 public class ApplicationService {
 
     private final ApplicationRepository applicationRepository;
-    private final LoanService loanService;
     private final UserServiceClient userServiceClient;
-    private final ClientFactory clientFactory;
+    private final BankServiceClient bankServiceClient;
+    private final NotificationProducer notificationProducer;
+
     private final ModelMapper modelMapper;
 
-    public Application createApplication(ApplicationRequest request) {
+    public ApplicationResponse createApplication(ApplicationRequest request) {
 
         String userEmail = getUser(request);
         log.info("User found");
 
-        Loan loan = getLoan(request);
+        Long loanId = getLoan(request);
         log.info("Loan found");
 
         Application newApplicatin = Application.builder()
                 .userEmail(userEmail)
-                .loan(loan)
+                .loanId(loanId)
                 .isActive(true)
                 .applicationStatus(ApplicationStatus.IN_PROGRESS)
                 .build();
 
         Application savedApplication = applicationRepository.save(newApplicatin);
-
-//        sendNotification(savedApplication);
-
-        return savedApplication;
+        sendNotification(savedApplication, NotificationContent.APPLICATION_CREATED);
+        return modelMapper.map(savedApplication, ApplicationResponse.class);
     }
 
 
-    private Loan getLoan(ApplicationRequest request) {
-        Loan loan = loanService.getLoanById(request.getLoanId());
-        if (loan == null) {
-            throw new RuntimeException("Loan not found");
+    private Long getLoan(ApplicationRequest request) {
+        Long loanId = request.getLoanId();
+        String bank = request.getBankName();
+        GenericResponse<List<MergedLoanResponse>> loanResponse = bankServiceClient.getAll().getBody();
+        // check if this loan id and bank is in the list
+        if (loanResponse == null) {
+            throw new RuntimeException("BankService returned empty response");
         }
-        return loan;
+        List<MergedLoanResponse> data = loanResponse.getData();
+        MergedLoanResponse mergedLoanResponse = data.stream()
+                .filter(loan -> loan.getLoanId().equals(loanId) && loan.getBankName().equals(bank))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Loan not found"));
+        return mergedLoanResponse.getLoanId();
     }
 
     private String getUser(ApplicationRequest request) {
@@ -76,24 +84,24 @@ public class ApplicationService {
 
 
 
-//    private void sendNotification(Application application) {
-//        NotificationDTO notificationDTO = getNotification(application);
-//        notificationProducer.sendNotification(notificationDTO);
-//    }
+    private void sendNotification(Application application, NotificationContent content) {
+        NotificationDTO notificationDTO = getNotification(application, content);
+        notificationProducer.sendNotification(notificationDTO);
+    }
 
-    private NotificationDTO getNotification(Application application) {
+    private NotificationDTO getNotification(Application application, NotificationContent content) {
         return NotificationDTO.builder()
                 .notificationType(NotificationType.EMAIL)
-                .message("Kredi başvurunuz alınmıştır. Başvuru durumunuzu takip edebilirsiniz.")
-                .email(application.getUserEmail())
+                .channel(application.getUserEmail())
+                .message(content.toString())
                 .build();
     }
 
-    public List<Application> getByEmail(String email) {
+    public List<ApplicationResponse> getByEmail(String email) {
         return applicationRepository.findByUserEmail(email);
     }
 
-    public List<Application> getAll() {
+    public List<ApplicationResponse> getAll() {
         return applicationRepository.findAll();
     }
 
