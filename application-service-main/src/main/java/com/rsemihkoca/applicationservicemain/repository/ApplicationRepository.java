@@ -1,9 +1,6 @@
 package com.rsemihkoca.applicationservicemain.repository;
 
 import com.rsemihkoca.applicationservicemain.model.Application;
-import com.rsemihkoca.applicationservicemain.model.User;
-import jakarta.transaction.Transactional;
-import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
