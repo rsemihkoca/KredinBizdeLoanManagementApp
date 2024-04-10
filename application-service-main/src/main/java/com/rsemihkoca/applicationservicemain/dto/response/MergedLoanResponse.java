@@ -12,6 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class MergedLoanResponse implements Serializable {
 
+    private Long loanId;
 
     private String bankName;
 
