@@ -1,18 +1,16 @@
-package com.rsemihkoca.akbankservice.exceptions;
+package com.rsemihkoca.bankservicemain.exceptions;
 
-import com.rsemihkoca.akbankservice.dto.response.ExceptionResponse;
-import com.rsemihkoca.akbankservice.dto.response.GenericResponse;
-import com.rsemihkoca.akbankservice.producer.TransactionProducer;
-import com.rsemihkoca.akbankservice.producer.dto.Transaction;
+import com.rsemihkoca.bankservicemain.dto.response.ExceptionResponse;
+import com.rsemihkoca.bankservicemain.dto.response.GenericResponse;
+import com.rsemihkoca.bankservicemain.producer.TransactionProducer;
+import com.rsemihkoca.bankservicemain.producer.dto.Transaction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
-
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @RestControllerAdvice
 @Slf4j
@@ -48,7 +46,7 @@ public class GlobalExceptionHandler {
     private Transaction prepareTransaction(Exception exception) {
         return Transaction.builder()
                 .errorMessage(exception.getMessage())
-                .sender("akbank-service-main")
+                .sender("bank-service-main")
                 .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                 .statusCode(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
                 .timestamp(LocalDateTime.now().toString())
