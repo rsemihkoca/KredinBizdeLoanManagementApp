@@ -9,8 +9,11 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoanResponse implements Serializable {
+public class MergedLoanResponse implements Serializable {
 
+    private Long loanId;
+
+    private String bankName;
 
     private String type;
 
@@ -19,7 +22,4 @@ public class LoanResponse implements Serializable {
     private Double interestRate;
 
     private Integer duration;
-    private String createDate;
-
-    private String updateDate;
 }
