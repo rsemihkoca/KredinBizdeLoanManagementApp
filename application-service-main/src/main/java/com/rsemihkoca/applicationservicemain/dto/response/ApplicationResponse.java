@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Data
 public class ApplicationResponse implements java.io.Serializable{
 
-    private Long userId;
+    private String userEmail;
     private LocalDateTime createDate;
     private ApplicationStatus applicationStatus;
 }
