@@ -1,13 +1,18 @@
-package com.rsemihkoca.applicationservicemain.exceptions;
+package com.rsemihkoca.akbankservice.exceptions;
 
-import com.rsemihkoca.applicationservicemain.dto.response.ExceptionResponse;
-import com.rsemihkoca.applicationservicemain.producer.TransactionProducer;
-import com.rsemihkoca.applicationservicemain.producer.dto.Transaction;
+import com.rsemihkoca.akbankservice.dto.response.ExceptionResponse;
+import com.rsemihkoca.akbankservice.dto.response.GenericResponse;
+import com.rsemihkoca.akbankservice.producer.TransactionProducer;
+import com.rsemihkoca.akbankservice.producer.dto.Transaction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @RestControllerAdvice
 @Slf4j
@@ -19,14 +24,18 @@ public class GlobalExceptionHandler {
         this.transactionProducer = transactionProducer;
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionResponse> handleAllException(Exception exception) {
-        log.error("exception occurred. {0}", exception.getCause());
-        transactionProducer.sendTransaction(prepareTransaction(exception));
+    @ExceptionHandler(NoResourceFoundException.class)
+    public void handleNoResourceFoundException(NoResourceFoundException exception) {
+    }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<GenericResponse<ExceptionResponse>> handleAllException(Exception exception) {
+        log.error("An exception occurred: ", exception);
+        transactionProducer.sendTransaction(prepareTransaction(exception));
+        GenericResponse<ExceptionResponse> response = GenericResponse.error(prepareExceptionResponse(exception));
         return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(prepareExceptionResponse(exception));
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(response);
     }
 
     private ExceptionResponse prepareExceptionResponse(Exception exception) {
@@ -39,10 +48,10 @@ public class GlobalExceptionHandler {
     private Transaction prepareTransaction(Exception exception) {
         return Transaction.builder()
                 .errorMessage(exception.getMessage())
-                .sender("application-service-main")
-                .httpStatus(HttpStatus.BAD_REQUEST)
-                .statusCode(String.valueOf(HttpStatus.BAD_REQUEST.value()))
-                .timestamp(System.currentTimeMillis())
+                .sender("akbank-service-main")
+                .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                .statusCode(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
+                .timestamp(LocalDateTime.now().toString())
                 .build();
     }
 
