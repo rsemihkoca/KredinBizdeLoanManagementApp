@@ -35,7 +35,7 @@ public class DataInitializerService implements CommandLineRunner {
 
         loanRequest = LoanRequest.builder()
                 .amount(200_000.0)
-                .type(LoanType.KONUT_KREDISI)
+                .type(LoanType.ARAC_KREDISI)
                 .duration(24)
                 .interestRate(1.2)
                 .build();
@@ -43,7 +43,7 @@ public class DataInitializerService implements CommandLineRunner {
 
         loanRequest = LoanRequest.builder()
                 .amount(300_000.0)
-                .type(LoanType.IHTIYAC_KREDISI)
+                .type(LoanType.ARAC_KREDISI)
                 .duration(36)
                 .interestRate(1.3)
                 .build();
@@ -51,7 +51,7 @@ public class DataInitializerService implements CommandLineRunner {
 
         loanRequest = LoanRequest.builder()
                 .amount(400_000.0)
-                .type(LoanType.TATIL_KREDISI)
+                .type(LoanType.ARAC_KREDISI)
                 .duration(48)
                 .interestRate(1.4)
                 .build();
@@ -59,7 +59,7 @@ public class DataInitializerService implements CommandLineRunner {
 
         loanRequest = LoanRequest.builder()
                 .amount(500_000.0)
-                .type(LoanType.ESNAF_KREDISI)
+                .type(LoanType.ARAC_KREDISI)
                 .duration(60)
                 .interestRate(1.6)
                 .build();
@@ -67,7 +67,7 @@ public class DataInitializerService implements CommandLineRunner {
 
         loanRequest = LoanRequest.builder()
                 .amount(600_000.0)
-                .type(LoanType.OGRENCI_KREDISI)
+                .type(LoanType.ARAC_KREDISI)
                 .duration(72)
                 .interestRate(1.7)
                 .build();
@@ -76,7 +76,7 @@ public class DataInitializerService implements CommandLineRunner {
 
         loanRequest = LoanRequest.builder()
                 .amount(700_000.0)
-                .type(LoanType.SAGLIK_KREDISI)
+                .type(LoanType.ARAC_KREDISI)
                 .duration(84)
                 .interestRate(1.8)
                 .build();
