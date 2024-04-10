@@ -5,9 +5,160 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a5472b0-dcb0-4e12-9501-a286206a48e4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/akbankservice/AkbankServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/akbankservice/AkbankServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/akbankservice/entity/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/akbankservice/entity/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/rsemihkoca/akbankservice/AkbankServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/rsemihkoca/akbankservice/AkbankServiceApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/client/bankservice/BankServiceClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/dto/response/GenericResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/dto/response/MergedLoanResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/BankServiceMainApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/Scheduler/DataSyncScheduler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/configuration/BeanConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/configuration/KafkaProducerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/configuration/RedisConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/controller/LoanController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/dto/response/ExceptionResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/dto/response/GenericResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/dto/response/LoanResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/dto/response/MergedLoanResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/entity/Constants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/entity/Loan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/enums/BankType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/exceptions/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/healthCheck/KafkaHealthIndicator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/producer/TransactionProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/producer/dto/Transaction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/repository/RedisRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/service/LoanService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/service/RedisService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/src/test/java/com/rsemihkoca/bankservicemain/BankServiceMainApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/BankServiceMainApplication.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/Scheduler/DataSyncScheduler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/client/BankServiceClient.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/client/ClientFactory$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/client/ClientFactory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/client/akbank/AkbankServiceClient.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/client/garanti/GarantiServiceClient.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/configuration/BeanConfiguration.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/configuration/KafkaProducerConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/configuration/RedisConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/controller/LoanController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/dto/response/ExceptionResponse$ExceptionResponseBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/dto/response/ExceptionResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/dto/response/GenericResponse$GenericResponseBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/dto/response/GenericResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/dto/response/LoanResponse$LoanResponseBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/dto/response/LoanResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/dto/response/MergedLoanResponse$MergedLoanResponseBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/dto/response/MergedLoanResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/entity/Constants.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/entity/Loan$LoanBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/entity/Loan.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/enums/BankType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/exceptions/GlobalExceptionHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/healthCheck/KafkaHealthIndicator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/producer/TransactionProducer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/producer/dto/Transaction$TransactionBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/producer/dto/Transaction.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/repository/RedisRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/service/LoanService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bank-service-main/target/classes/com/rsemihkoca/bankservicemain/service/RedisService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/GarantiServiceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/configuration/BeanConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/configuration/KafkaProducerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/controller/LoanController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/dto/request/LoanRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/dto/response/ExceptionResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/dto/response/GenericResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/dto/response/LoanResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/entity/Constants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/entity/Loan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/enums/LoanType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/exceptions/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/healthCheck/KafkaHealthIndicator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/healthCheck/MySQLHealthIndicator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/mapper/LoanRequestToLoanConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/producer/TransactionProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/producer/dto/Transaction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/repository/LoanRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/service/DataInitializerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rsemihkoca/garantiservice/service/LoanService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/rsemihkoca/garantiservice/AkbankServiceApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../garanti-service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../garanti-service/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../garanti-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../garanti-service/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../garanti-service/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../garanti-service/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../garanti-service/src/main/java/com/rsemihkoca/garantiservice/GarantiServiceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../garanti-service/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../garanti-service/src/test/java/com/rsemihkoca/garantiservice/GarantiServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../akbank-service-main/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../akbank-service-main/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../akbank-service-main/src/main/java/com/rsemihkoca/akbankservice/AkbankServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../akbank-service-main/src/main/java/com/rsemihkoca/akbankservice/AkbankServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../akbank-service-main/src/main/java/com/rsemihkoca/akbankservice/entity/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../akbank-service-main/src/main/java/com/rsemihkoca/akbankservice/entity/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../akbank-service-main/src/test/java/com/rsemihkoca/akbankservice/AkbankServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../akbank-service-main/src/test/java/com/rsemihkoca/akbankservice/AkbankServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/ApplicationServiceMainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/ApplicationServiceMainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/client/BankServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/client/BankServiceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/client/ClientFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/client/ClientFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/client/akbank/AkbankClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/client/akbank/AkbankServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/client/akbank/AkbankServiceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/client/garanti/GarantiClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/client/garanti/GarantiServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bank-service-main/src/main/java/com/rsemihkoca/bankservicemain/client/garanti/GarantiServiceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/client/userservice/UserClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/client/userservice/UserServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/client/userservice/UserServiceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/configuration/BeanConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/configuration/BeanConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/controller/ApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/dto/response/ApplicationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/dto/response/ApplicationResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/enums/BankType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/enums/LoanType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/model/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/model/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/model/Bank.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/model/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/model/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/model/Loan.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/repository/BankRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/repository/LoanRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/service/ApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/service/ApplicationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/service/BankService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/service/LoanService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../application-service-main/src/main/java/com/rsemihkoca/applicationservicemain/service/datainitializer/DataInitializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/patika/garantiservice/GarantiServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/patika/garantiservice/controller/ApplicationController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/patika/garantiservice/converter/ApplicationConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/patika/garantiservice/dto/request/ApplicationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/patika/garantiservice/dto/response/ApplicationResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/patika/garantiservice/entity/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/patika/garantiservice/entity/Constants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/patika/garantiservice/enums/BankApplicationStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/patika/garantiservice/repository/ApplicationRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/patika/garantiservice/service/ApplicationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/patika/garantiservice/GarantiServiceApplicationTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +207,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.AkbankServiceApplication.executor": "Debug",
+    "Spring Boot.GarantiServiceApplication.executor": "Debug",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/rsemihkoca/Projects/week-4-rsemihkoca",
     "node.js.detected.package.eslint": "true",
@@ -81,7 +233,7 @@
       <recent name="com.patika.akbankservice.entity" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.GarantiServiceApplication">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="akbank-service-main" />
       <option name="ENV_FILES" value="" />
@@ -155,8 +307,16 @@
     </configuration>
     <configuration name="AkbankServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="akbank-service" />
+      <module name="garanti-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.rsemihkoca.akbankservice.AkbankServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GarantiServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="garanti-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.rsemihkoca.garantiservice.GarantiServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -230,6 +390,7 @@
       <workItem from="1711736996802" duration="3000" />
       <workItem from="1712668516095" duration="2606000" />
       <workItem from="1712698474446" duration="13587000" />
+      <workItem from="1712756411399" duration="2474000" />
     </task>
     <servers />
   </component>
