@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="gateway-service-main" />
         <module name="logconsumer-service-main" />
+        <module name="bank-service-main" />
         <module name="kredinbizde-discovery" />
         <module name="akbank-service" />
         <module name="user-service-main" />
@@ -25,6 +26,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="akbank-service" options="-parameters" />
       <module name="application-service-main" options="-parameters" />
+      <module name="bank-service-main" options="-parameters" />
       <module name="garanti-service" options="-parameters" />
       <module name="gateway-service-main" options="-parameters" />
       <module name="kredinbizde-discovery" options="-parameters" />
