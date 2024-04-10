@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/akbank-service-main/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/application-service-main/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bank-service-main/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/garanti-service-main/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway-service-main/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/kredinbizde-discovery-main/src/main/java" charset="UTF-8" />
