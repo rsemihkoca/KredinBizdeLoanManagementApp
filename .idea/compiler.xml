@@ -8,7 +8,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="gateway-service-main" />
-        <module name="kredinbizde-service" />
         <module name="logconsumer-service-main" />
         <module name="kredinbizde-discovery" />
         <module name="akbank-service" />
@@ -18,6 +17,9 @@
         <module name="notification-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="kredinbizde-service" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -26,7 +28,7 @@
       <module name="garanti-service" options="-parameters" />
       <module name="gateway-service-main" options="-parameters" />
       <module name="kredinbizde-discovery" options="-parameters" />
-      <module name="kredinbizde-service" options="-parameters" />
+      <module name="kredinbizde-service" options="" />
       <module name="logconsumer-service-main" options="-parameters" />
       <module name="notification-service" options="-parameters" />
       <module name="user-service-main" options="-parameters" />
