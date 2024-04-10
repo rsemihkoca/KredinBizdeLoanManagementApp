@@ -21,9 +21,8 @@ public class Application implements Serializable {
     @Column(name = applicationTable.APPLICATION_ID)
     private Long applicationId;
 
-    @OneToOne
-    @JoinColumn(name = loanTable.LOAN_ID, unique = true)
-    private Loan loan;
+    @Column(name = loanTable.LOAN_ID, nullable = false)
+    private Long loanId;
 
     @Column(name = userTable.EMAIL, unique = true, nullable = false)
     private String userEmail;
