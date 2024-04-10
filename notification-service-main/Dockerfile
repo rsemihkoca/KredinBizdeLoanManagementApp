@@ -13,9 +13,6 @@ RUN mvn dependency:go-offline
 # Copy the source code
 COPY src ./src
 
-# Copy the application properties file
-COPY application.yml ./src/main/resources/application.yml
-
 # Build the application
 RUN mvn clean package -Dmaven.test.skip=true
 
@@ -26,9 +23,9 @@ FROM openjdk:21-oracle
 WORKDIR /app
 
 # Copy the packaged jar file from the builder stage
-COPY --from=builder /app/target/logconsumer-service-main.jar /app
+COPY --from=builder /app/target/notification-service-main.jar /app
 
 # Expose the port the application runs on
-EXPOSE 8084
+EXPOSE 8085
 # Set the entry point to execute the jar
-ENTRYPOINT ["java", "-jar", "logconsumer-service-main.jar"]
+ENTRYPOINT ["java", "-jar", "notification-service-main.jar"]
