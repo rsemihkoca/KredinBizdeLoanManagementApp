@@ -25,9 +25,8 @@ public class Application implements Serializable {
     @JoinColumn(name = loanTable.LOAN_ID, unique = true)
     private Loan loan;
 
-    @ManyToOne
-    @JoinColumn(name = userTable.USER_ID, nullable = false)
-    private User user;
+    @Column(name = userTable.EMAIL, unique = true, nullable = false)
+    private String userEmail;
 
     @Column(name = applicationTable.IS_ACTIVE, columnDefinition = "boolean default false")
     private boolean isActive;
