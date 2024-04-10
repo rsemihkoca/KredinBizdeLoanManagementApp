@@ -1,4 +1,4 @@
-package com.rsemihkoca.akbankservice.dto.response;
+package com.rsemihkoca.bankservicemain.dto.response;
 
 
 import lombok.AllArgsConstructor;
