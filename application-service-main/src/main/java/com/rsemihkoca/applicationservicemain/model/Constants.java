@@ -17,26 +17,13 @@ public final class Constants {
     }
 
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class bankTable {
-        public static final String TABLE_NAME = "BANK";
-        public static final String BANK_ID = "BANK_ID";
-        public static final String NAME = "NAME";
-    }
-
-    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class loanTable {
-        public static final String TABLE_NAME = "LOAN";
         public static final String LOAN_ID = "LOAN_ID";
-        public static final String AMOUNT = "AMOUNT";
-        public static final String DURATION = "DURATION";
-        public static final String INTEREST_RATE = "INTEREST_RATE";
-        public static final String LOAN_TYPE = "LOAN_TYPE";
 
     }
 
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class userTable {
-        public static final String TABLE_NAME = "USER";
         public static final String EMAIL = "EMAIL";
     }
 
