@@ -5,6 +5,8 @@ import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.http.HttpStatus;
 
+import java.time.LocalDateTime;
+
 @Document(collection = "transactions")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +18,6 @@ public class Transaction {
     private String sender;
     private String statusCode;
     private HttpStatus httpStatus;
-    private long timestamp;
+    private LocalDateTime timestamp;
 
 }
