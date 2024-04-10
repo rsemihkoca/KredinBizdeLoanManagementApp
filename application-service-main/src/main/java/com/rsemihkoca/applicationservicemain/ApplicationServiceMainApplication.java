@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = "com.rsemihkoca.applicationservicemain.client")
+@EnableFeignClients
 @EnableCaching
 public class ApplicationServiceMainApplication {
 
