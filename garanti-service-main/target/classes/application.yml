@@ -1,5 +1,5 @@
 server:
-  port: '5556'
+  port: '5555'
 
 management:
   endpoint:
@@ -19,7 +19,7 @@ spring:
         composite-indicator:
           enabled: false
   application:
-    name: akbank-service
+    name: garanti-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
