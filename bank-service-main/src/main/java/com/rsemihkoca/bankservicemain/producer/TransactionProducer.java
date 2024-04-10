@@ -1,8 +1,8 @@
-package com.rsemihkoca.akbankservice.producer;
+package com.rsemihkoca.bankservicemain.producer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rsemihkoca.akbankservice.producer.dto.Transaction;
+import com.rsemihkoca.bankservicemain.producer.dto.Transaction;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
