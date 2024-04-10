@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class LoanResponse implements Serializable {
 
+    private Long loanId;
 
     private String type;
 
