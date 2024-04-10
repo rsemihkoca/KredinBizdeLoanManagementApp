@@ -147,6 +147,7 @@ services:
 
   garanti-service-main:
     image: garanti-service-main:latest
+    container_name: garanti-service-main
     build:
       context: ./garanti-service-main
       dockerfile: Dockerfile
@@ -154,6 +155,7 @@ services:
       - "5555:5555"
     networks:
       - spring-boot
+      - rmoff_kafka
       - garanti-service-network
     depends_on:
       kredinbizde-discovery:
@@ -161,6 +163,10 @@ services:
     environment:
       - EUREKA_SERVER_URL=http://kredinbizde-discovery:8761/eureka
       - MYSQL_DB_HOST=mysql-garanti-service
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=broker:29092
+
 
   akbank-service-main:
     image: akbank-service-main:latest
@@ -202,6 +208,29 @@ services:
       - EUREKA_SERVER_URL=http://kredinbizde-discovery:8761/eureka
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=broker:29092
       - MYSQL_DB_HOST=mysql-application-service
+
+
+  bank-service-main:
+    image: bank-service-main:latest
+    build:
+      context: ./bank-service-main
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    networks:
+      - spring-boot
+      - rmoff_kafka
+#      - bank-service-network
+    depends_on:
+      kredinbizde-discovery:
+        condition: service_healthy
+    environment:
+      - EUREKA_SERVER_URL=http://kredinbizde-discovery:8761/eureka
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=broker:29092
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+#      - MYSQL_DB_HOST=mysql-user-service
+
 
 
   user-service-main:
