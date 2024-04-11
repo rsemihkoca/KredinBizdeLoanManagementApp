@@ -11,18 +11,21 @@ import com.rsemihkoca.applicationservicemain.enums.ApplicationStatus;
 import com.rsemihkoca.applicationservicemain.enums.NotificationContent;
 import com.rsemihkoca.applicationservicemain.enums.NotificationType;
 import com.rsemihkoca.applicationservicemain.model.Application;
+import com.rsemihkoca.applicationservicemain.model.Constants;
 import com.rsemihkoca.applicationservicemain.producer.NotificationProducer;
-import com.rsemihkoca.applicationservicemain.producer.dto.NotificationDTO;
+import com.rsemihkoca.applicationservicemain.producer.dto.Notification;
 import com.rsemihkoca.applicationservicemain.repository.ApplicationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.rsemihkoca.applicationservicemain.dto.request.ApplicationRequest;
 
-import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +39,7 @@ public class ApplicationService {
 
     private final ModelMapper modelMapper;
 
+    @CacheEvict(value = Constants.applicationTable.TABLE_NAME, allEntries = true)
     public ApplicationResponse createApplication(ApplicationRequest request) {
 
         String userEmail = getUser(request);
@@ -43,6 +47,9 @@ public class ApplicationService {
 
         Long loanId = getLoan(request);
         log.info("Loan found");
+
+        // check if there is an active application for this user for same loan
+        // :TODO
 
         Application newApplicatin = Application.builder()
                 .userEmail(userEmail)
@@ -75,34 +82,44 @@ public class ApplicationService {
 
     private String getUser(ApplicationRequest request) {
         String email = request.getEmail();
-        ResponseEntity<UserResponse> user = userServiceClient.getByEmail(email);
-        if (user.getBody() == null) {
+        ResponseEntity<GenericResponse<UserResponse>> user = userServiceClient.getByEmail(email);
+        if (user.getBody().getData() == null) {
             throw new RuntimeException("User not found");
         }
-        return user.getBody().getEmail();
+        return user.getBody().getData().getEmail();
     }
 
 
 
     private void sendNotification(Application application, NotificationContent content) {
-        NotificationDTO notificationDTO = getNotification(application, content);
-        notificationProducer.sendNotification(notificationDTO);
+        Notification notification = getNotification(application, content);
+        notificationProducer.sendNotification(notification);
     }
 
-    private NotificationDTO getNotification(Application application, NotificationContent content) {
-        return NotificationDTO.builder()
+    private Notification getNotification(Application application, NotificationContent content) {
+        return Notification.builder()
                 .notificationType(NotificationType.EMAIL)
                 .channel(application.getUserEmail())
                 .message(content.toString())
                 .build();
     }
-
+    // Check only return active applications
+    @Cacheable(value = Constants.applicationTable.TABLE_NAME, key = "#email")
     public List<ApplicationResponse> getByEmail(String email) {
-        return applicationRepository.findByUserEmail(email);
-    }
+        List<Application> applications = applicationRepository.findByUserEmailAndIsActive(email, true);
 
+        return applications.stream()
+                .map(application -> modelMapper.map(application, ApplicationResponse.class))
+                .collect(Collectors.toList());
+    }
+    // Check only return active applications
+
+    @Cacheable(value = Constants.applicationTable.TABLE_NAME)
     public List<ApplicationResponse> getAll() {
-        return applicationRepository.findAll();
-    }
+        List<Application> applications = applicationRepository.findAllByIsActive(true);
 
+        return applications.stream()
+                .map(application -> modelMapper.map(application, ApplicationResponse.class))
+                .collect(Collectors.toList());
+    }
 }
