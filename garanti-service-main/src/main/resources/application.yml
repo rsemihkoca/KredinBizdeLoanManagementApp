@@ -19,7 +19,7 @@ spring:
         composite-indicator:
           enabled: false
   application:
-    name: garanti-service
+    name: garanti-service-main
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
