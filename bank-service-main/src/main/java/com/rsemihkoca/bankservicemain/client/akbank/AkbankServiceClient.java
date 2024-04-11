@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.rsemihkoca.bankservicemain.client.BankServiceClient;
 import java.util.List;
 
-@FeignClient(value = "akbank-service")
+@FeignClient(value = "akbank-service-main")
 public interface AkbankServiceClient extends BankServiceClient {
 
     @GetMapping("akbank/v1/api/loan")
