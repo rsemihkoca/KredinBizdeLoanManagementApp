@@ -3,8 +3,6 @@ package com.rsemihkoca.applicationservicemain.controller;
 import com.rsemihkoca.applicationservicemain.dto.request.ApplicationRequest;
 import com.rsemihkoca.applicationservicemain.dto.response.ApplicationResponse;
 import com.rsemihkoca.applicationservicemain.dto.response.GenericResponse;
-import com.rsemihkoca.applicationservicemain.dto.response.UserResponse;
-import com.rsemihkoca.applicationservicemain.model.Application;
 import com.rsemihkoca.applicationservicemain.service.ApplicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,12 +25,12 @@ public class ApplicationController {
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<GenericResponse<List<ApplicationResponse>> getByEmail(@PathVariable String email) {
+    public ResponseEntity<GenericResponse<List<ApplicationResponse>>> getByEmail(@PathVariable String email) {
         return ResponseEntity.ok(GenericResponse.success(applicationService.getByEmail(email)));
     }
 
     @GetMapping("/")
-    public ResponseEntity<GenericResponse<List<ApplicationResponse>> getAll() {
+    public ResponseEntity<GenericResponse<List<ApplicationResponse>>> getAll() {
         return ResponseEntity.ok(GenericResponse.success(applicationService.getAll()));
     }
 
