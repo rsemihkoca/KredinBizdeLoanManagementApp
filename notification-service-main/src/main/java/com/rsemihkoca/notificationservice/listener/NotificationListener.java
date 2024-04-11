@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class NotificationListener {
 
-    private final com.rsemihkoca.notificationservice.service.NotificationService notificationService;
+    private final NotificationService notificationService;
 
-    private final com.rsemihkoca.notificationservice.service.SmsNotificationStrategy smsNotificationStrategy;
+    private final SmsNotificationStrategy smsNotificationStrategy;
     private final EmailNotificationStrategy emailNotificationStrategy;
     private final MobileNotificationStrategy mobileNotificationStrategy;
 
@@ -27,12 +27,12 @@ public class NotificationListener {
         this.mobileNotificationStrategy = mobileNotificationStrategy;
     }
 
-    @KafkaListener(topics = "${spring.kafka.producer.notification-topic}", groupId = "${spring.kafka.consumer.group-id}")
-    public void sendNotification(Notification notification) {
+    public Notification sendNotification(Notification notification) {
         log.info("Notification received: {}", notification);
         NotificationStrategy notificationStrategy = getNotificationType(notification);
         notificationService.setNotificationStrategy(notificationStrategy);
         notificationService.sendNotification(notification);
+        return notification;
 
     }
 
