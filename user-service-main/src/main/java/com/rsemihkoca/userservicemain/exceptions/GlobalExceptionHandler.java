@@ -1,34 +1,37 @@
+
 package com.rsemihkoca.userservicemain.exceptions;
 
 import com.rsemihkoca.userservicemain.exceptions.dto.ExceptionResponse;
-import com.rsemihkoca.userservicemain.producer.TransactionProducer;
-import com.rsemihkoca.userservicemain.producer.dto.Transaction;
+import com.rsemihkoca.userservicemain.exceptions.dto.response.GenericResponse;
+import com.rsemihkoca.userservicemain.producer.GenericKafkaProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
+import com.rsemihkoca.userservicemain.producer.dto.Transaction;
 import java.time.LocalDateTime;
 
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 
-    private final TransactionProducer transactionProducer;
+    private final GenericKafkaProducer genericKafkaProducer;
 
-    public GlobalExceptionHandler(TransactionProducer transactionProducer) {
-        this.transactionProducer = transactionProducer;
+    public GlobalExceptionHandler(GenericKafkaProducer genericKafkaProducer) {
+        this.genericKafkaProducer = genericKafkaProducer;
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionResponse> handleAllException(Exception exception) {
-        log.error("exception occurred. {0}", exception.getCause());
-        transactionProducer.sendTransaction(prepareTransaction(exception));
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<GenericResponse<ExceptionResponse>> handleAllException(Exception exception) {
+        log.error("exception occurred. {0}", exception.getCause());
+        genericKafkaProducer.sendTransaction(prepareTransaction(exception));
+
+        GenericResponse<ExceptionResponse> response = GenericResponse.error(prepareExceptionResponse(exception));
         return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(prepareExceptionResponse(exception));
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(response);
     }
 
     private ExceptionResponse prepareExceptionResponse(Exception exception) {
