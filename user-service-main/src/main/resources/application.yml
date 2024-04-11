@@ -9,8 +9,8 @@ spring:
     producer:
       acks: -1
       bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
-    template:
-      default-topic: kafka-log-topic
+      error-topic: kafka-log-topic
+      user-deletion-topic: user-deletion-topic
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
