@@ -1,35 +1,33 @@
-package com.rsemihkoca.logconsumerservicemain.listener;
+package com.rsemihkoca.applicationservicemain.listener;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rsemihkoca.logconsumerservicemain.repository.TransactionRepository;
-import com.rsemihkoca.logconsumerservicemain.document.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.rsemihkoca.applicationservicemain.service.ApplicationService;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+import com.rsemihkoca.applicationservicemain.producer.dto.DeletedUser;
 
 @Component
 public class KafkaConsumerListener {
 
-    @Autowired
     private final ObjectMapper objectMapper;
 
-    @Autowired
-    private final TransactionRepository transactionRepository;
+    private final ApplicationService applicationService;
 
-    public KafkaConsumerListener(ObjectMapper objectMapper, TransactionRepository transactionRepository) {
+    public KafkaConsumerListener(ObjectMapper objectMapper, ApplicationService applicationService) {
         this.objectMapper = objectMapper;
-        this.transactionRepository = transactionRepository;
+        this.applicationService = applicationService;
     }
 
-    @KafkaListener(topics = "${spring.kafka.topic.name}", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "${spring.kafka.producer.user-deletion-topic}", groupId = "${spring.kafka.consumer.group-id}")
     public void listen(String message) {
         System.out.printf("Received Messasge: [%s] %n", message);
         try {
-            Transaction transaction = objectMapper.readValue(message, Transaction.class);
-            Transaction save = transactionRepository.save(transaction);
-            System.out.println("Transaction saved to MongoDB" + save);
+            DeletedUser user = objectMapper.readValue(message, DeletedUser.class);
+            System.out.println("DeletedUser a user " + user);
+            Integer count = applicationService.deactivateApplicationsByUserEmail(user.getEmail());
+            System.out.println("Deactivated " + count + " applications");
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
