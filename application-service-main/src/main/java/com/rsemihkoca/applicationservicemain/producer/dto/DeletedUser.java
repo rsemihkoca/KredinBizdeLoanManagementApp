@@ -1,4 +1,4 @@
-package com.rsemihkoca.userservicemain.producer.dto;
+package com.rsemihkoca.applicationservicemain.producer.dto;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;
@@ -10,5 +10,5 @@ import org.springframework.http.HttpStatus;
 @Data
 @EqualsAndHashCode
 public class DeletedUser {
-    private Long userId;
+    private String email;
 }
