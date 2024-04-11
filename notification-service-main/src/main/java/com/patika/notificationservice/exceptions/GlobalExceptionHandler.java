@@ -1,14 +1,12 @@
-package com.rsemihkoca.applicationservicemain.exceptions;
-
-import com.rsemihkoca.applicationservicemain.dto.response.ExceptionResponse;
-import com.rsemihkoca.applicationservicemain.producer.TransactionProducer;
-import com.rsemihkoca.applicationservicemain.producer.dto.Transaction;
+package com.patika.notificationservice.exceptions;
+import com.patika.notificationservice.dto.response.ExceptionResponse;
+import com.patika.notificationservice.producer.TransactionProducer;
+import com.patika.notificationservice.producer.dto.Transaction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import java.time.LocalDateTime;
 
 @RestControllerAdvice
@@ -41,7 +39,7 @@ public class GlobalExceptionHandler {
     private Transaction prepareTransaction(Exception exception) {
         return Transaction.builder()
                 .errorMessage(exception.getMessage())
-                .sender("application-service-main")
+                .sender("notification-service-main")
                 .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                 .statusCode(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
                 .timestamp(LocalDateTime.now().toString())
