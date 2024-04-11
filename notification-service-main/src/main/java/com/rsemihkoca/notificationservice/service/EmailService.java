@@ -1,4 +1,4 @@
-package com.patika.notificationservice.service;
+package com.rsemihkoca.notificationservice.service;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

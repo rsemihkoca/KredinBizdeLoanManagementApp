@@ -1,7 +1,7 @@
-package com.patika.notificationservice.exceptions;
-import com.patika.notificationservice.dto.response.ExceptionResponse;
-import com.patika.notificationservice.producer.TransactionProducer;
-import com.patika.notificationservice.producer.dto.Transaction;
+package com.rsemihkoca.notificationservice.exceptions;
+import com.rsemihkoca.notificationservice.dto.response.ExceptionResponse;
+import com.rsemihkoca.notificationservice.producer.TransactionProducer;
+import com.rsemihkoca.notificationservice.producer.dto.Transaction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

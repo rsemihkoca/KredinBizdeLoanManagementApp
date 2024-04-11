@@ -1,8 +1,8 @@
-package com.patika.notificationservice.listener;
+package com.rsemihkoca.notificationservice.listener;
 
-import com.patika.notificationservice.dto.Notification;
-import com.patika.notificationservice.dto.enums.NotificationType;
-import com.patika.notificationservice.service.*;
+import com.rsemihkoca.notificationservice.dto.Notification;
+import com.rsemihkoca.notificationservice.dto.enums.NotificationType;
+import com.rsemihkoca.notificationservice.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class NotificationListener {
 
-    private final NotificationService notificationService;
+    private final com.rsemihkoca.notificationservice.service.NotificationService notificationService;
 
-    private final SmsNotificationStrategy smsNotificationStrategy;
+    private final com.rsemihkoca.notificationservice.service.SmsNotificationStrategy smsNotificationStrategy;
     private final EmailNotificationStrategy emailNotificationStrategy;
     private final MobileNotificationStrategy mobileNotificationStrategy;
 

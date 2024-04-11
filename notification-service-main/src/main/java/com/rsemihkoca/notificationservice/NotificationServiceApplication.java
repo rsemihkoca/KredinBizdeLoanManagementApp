@@ -1,4 +1,4 @@
-package com.patika.notificationservice;
+package com.rsemihkoca.notificationservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

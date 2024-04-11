@@ -1,6 +1,6 @@
-package com.patika.notificationservice.dto;
+package com.rsemihkoca.notificationservice.dto;
 
-import com.patika.notificationservice.dto.enums.NotificationType;
+import com.rsemihkoca.notificationservice.dto.enums.NotificationType;
 import lombok.*;
 
 @Getter

@@ -1,6 +1,6 @@
-package com.patika.notificationservice.service;
+package com.rsemihkoca.notificationservice.service;
 
-import com.patika.notificationservice.dto.Notification;
+import com.rsemihkoca.notificationservice.dto.Notification;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @Scope(value = "prototype")
-public class MobileNotificationStrategy implements NotificationStrategy{
+public class SmsNotificationStrategy implements NotificationStrategy{
     @Override
     public void sendNotification(Notification message) {
-        System.out.println("Mobile notification sent: " + message);
+        log.info("Sms gönderildi: {}", message);
     }
 }

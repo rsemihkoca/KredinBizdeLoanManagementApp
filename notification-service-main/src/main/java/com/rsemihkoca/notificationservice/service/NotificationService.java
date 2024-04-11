@@ -1,6 +1,6 @@
-package com.patika.notificationservice.service;
+package com.rsemihkoca.notificationservice.service;
 
-import com.patika.notificationservice.dto.Notification;
+import com.rsemihkoca.notificationservice.dto.Notification;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 

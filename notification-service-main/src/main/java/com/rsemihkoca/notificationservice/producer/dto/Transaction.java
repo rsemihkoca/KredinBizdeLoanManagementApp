@@ -1,4 +1,4 @@
-package com.patika.notificationservice.producer.dto;
+package com.rsemihkoca.notificationservice.producer.dto;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;

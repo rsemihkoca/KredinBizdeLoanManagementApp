@@ -1,4 +1,4 @@
-package com.patika.notificationservice.dto.enums;
+package com.rsemihkoca.notificationservice.dto.enums;
 
 public enum NotificationContent {
 

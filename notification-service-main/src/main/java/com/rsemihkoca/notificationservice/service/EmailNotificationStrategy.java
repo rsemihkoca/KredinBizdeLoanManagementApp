@@ -1,7 +1,7 @@
-package com.patika.notificationservice.service;
+package com.rsemihkoca.notificationservice.service;
 
-import com.patika.notificationservice.dto.Notification;
-import com.patika.notificationservice.dto.enums.NotificationContent;
+import com.rsemihkoca.notificationservice.dto.Notification;
+import com.rsemihkoca.notificationservice.dto.enums.NotificationContent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -43,7 +43,8 @@ public class EmailNotificationStrategy implements NotificationStrategy {
         log.info("Email gönderildi: {}", message);
 
         switch (NotificationContent.valueOf(message.getMessage())) {
-            case APPLICATION_CREATED -> applicationCreated(message);
+//            case APPLICATION_CREATED -> applicationCreated(message);
+            case APPLICATION_CREATED -> log.info("Email doğrulama maili gönderildi.");
             case APPLICATION_UPDATED -> log.info("Şifre sıfırlama maili gönderildi.");
             case APPLICATION_DELETED -> log.info("Email bildirim maili gönderildi.");
         }
