@@ -9,6 +9,7 @@ import lombok.*;
 public class ApplicationResponse implements java.io.Serializable{
 
     private String userEmail;
+    private MergedLoanResponse mergedLoanResponse;
     private String applicationDate;
     private String applicationStatus;
 
