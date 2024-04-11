@@ -19,7 +19,7 @@ spring:
         composite-indicator:
           enabled: false
   application:
-    name: akbank-service
+    name: akbank-service-main
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
