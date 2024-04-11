@@ -20,24 +20,12 @@ spring:
           enabled: false
   application:
     name: bank-service-main
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    username: root
-#    password: example
-#    url: jdbc:mysql://${MYSQL_DB_HOST:localhost}:3306/test?allowPublicKeyRetrieval=true&useSSL=false
   kafka:
     producer:
       acks: -1
       bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     template:
       default-topic: kafka-log-topic
-#  jpa:
-#    hibernate:
-#      ddl-auto: create-drop
-#    generate-ddl: true
-#    show-sql: true
-#    properties:
-#      hibernate.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
   data:
     redis:
       host: ${SPRING_REDIS_HOST:localhost}
