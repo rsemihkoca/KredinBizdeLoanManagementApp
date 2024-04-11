@@ -24,11 +24,17 @@ public class Application implements Serializable {
     @Column(name = loanTable.LOAN_ID, nullable = false)
     private Long loanId;
 
-    @Column(name = userTable.EMAIL, unique = true, nullable = false)
+    @Column(name = applicationTable.BANK_NAME, nullable = false)
+    private String bankName;
+
+    @Column(name = userTable.EMAIL, nullable = false)
     private String userEmail;
 
     @Column(name = applicationTable.IS_ACTIVE, columnDefinition = "boolean default false")
     private boolean isActive;
+
+    @Column(name = applicationTable.APPLICATION_DATE)
+    private String applicationDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = applicationTable.APPLICATION_STATUS)
