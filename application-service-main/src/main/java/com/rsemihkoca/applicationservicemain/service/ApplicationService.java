@@ -24,6 +24,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.rsemihkoca.applicationservicemain.dto.request.ApplicationRequest;
 
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,22 +54,30 @@ public class ApplicationService {
         // check if there is an active application for this user for same loan
         // :TODO
 
-        Application newApplicatin = Application.builder()
+        Application newApplication = getNewApplication(request, userEmail, loanId);
+        Application savedApplication = applicationRepository.save(newApplication);
+
+        sendNotification(savedApplication, NotificationContent.APPLICATION_CREATED);
+
+        return modelMapper.map(savedApplication, ApplicationResponse.class);
+    }
+
+    private static Application getNewApplication(ApplicationRequest request, String userEmail, Long loanId) {
+        return Application.builder()
                 .userEmail(userEmail)
                 .loanId(loanId)
                 .isActive(true)
+                .bankName(request.getBankName().toUpperCase())
                 .applicationStatus(ApplicationStatus.IN_PROGRESS)
+                .applicationDate(LocalDateTime.now().toString())
                 .build();
-
-        Application savedApplication = applicationRepository.save(newApplicatin);
-        sendNotification(savedApplication, NotificationContent.APPLICATION_CREATED);
-        return modelMapper.map(savedApplication, ApplicationResponse.class);
     }
+
 
 
     private Long getLoan(ApplicationRequest request) {
         Long loanId = request.getLoanId();
-        String bank = request.getBankName();
+        String bank = request.getBankName().toUpperCase();
         GenericResponse<List<MergedLoanResponse>> loanResponse = bankServiceClient.getAll().getBody();
         // check if this loan id and bank is in the list
         if (loanResponse == null) {
@@ -74,7 +85,7 @@ public class ApplicationService {
         }
         List<MergedLoanResponse> data = loanResponse.getData();
         MergedLoanResponse mergedLoanResponse = data.stream()
-                .filter(loan -> loan.getLoanId().equals(loanId) && loan.getBankName().equals(bank))
+                .filter(loan -> loan.getLoanId().equals(loanId) && loan.getBankName().toUpperCase().equals(bank))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Loan not found"));
         return mergedLoanResponse.getLoanId();
@@ -103,11 +114,11 @@ public class ApplicationService {
                 .message(content.toString())
                 .build();
     }
-    // Check only return active applications
-    @Cacheable(value = Constants.applicationTable.TABLE_NAME, key = "#email")
-    public List<ApplicationResponse> getByEmail(String email) {
-        List<Application> applications = applicationRepository.findByUserEmailAndIsActive(email, true);
 
+    // Check only return active applications
+    //@Cacheable(value = Constants.applicationTable.TABLE_NAME, key = "#email")
+    public List<ApplicationResponse> getByEmail(String email) {
+        List<Application> applications = applicationRepository.findActiveApplicationsByUserEmail(email);
         return applications.stream()
                 .map(application -> modelMapper.map(application, ApplicationResponse.class))
                 .collect(Collectors.toList());
@@ -116,7 +127,7 @@ public class ApplicationService {
 
     @Cacheable(value = Constants.applicationTable.TABLE_NAME)
     public List<ApplicationResponse> getAll() {
-        List<Application> applications = applicationRepository.findAllByIsActive(true);
+        List<Application> applications = applicationRepository.findAllActiveApplications();
 
         return applications.stream()
                 .map(application -> modelMapper.map(application, ApplicationResponse.class))
