@@ -1,9 +1,7 @@
-package com.rsemihkoca.applicationservicemain.producer.dto;
+package com.patika.notificationservice.producer.dto;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;
-
-import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
