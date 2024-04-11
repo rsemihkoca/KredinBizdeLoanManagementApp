@@ -1,16 +1,18 @@
-package com.rsemihkoca.applicationservicemain.client.garanti;
+package com.rsemihkoca.bankservicemain.client.garanti;
 
-import com.rsemihkoca.applicationservicemain.client.BankServiceClient;
-import com.rsemihkoca.applicationservicemain.dto.request.BankApplicationRequest;
-import com.rsemihkoca.applicationservicemain.dto.response.ApplicationResponse;
+import com.rsemihkoca.bankservicemain.client.BankServiceClient;
+import com.rsemihkoca.bankservicemain.dto.response.GenericResponse;
+import com.rsemihkoca.bankservicemain.dto.response.LoanResponse;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 
-@FeignClient(value = "garanti-service", url = "localhost:5555")
+@FeignClient(value = "garanti-service-main")
 public interface GarantiServiceClient extends BankServiceClient {
 
-    @PostMapping("api/garanti/v1/application")
-    ApplicationResponse createApplication(@RequestBody BankApplicationRequest request);
+    @GetMapping("garanti/v1/api/loan")
+    ResponseEntity<GenericResponse<List<LoanResponse>>> getAll();
 }
