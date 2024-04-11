@@ -1,6 +1,7 @@
 package com.rsemihkoca.applicationservicemain.client.userservice;
 
 //import com.rsemihkoca.applicationservicemain.client.IUserServiceClient;
+import com.rsemihkoca.applicationservicemain.dto.response.GenericResponse;
 import com.rsemihkoca.applicationservicemain.dto.response.UserResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 //    ResponseEntity<UserResponse> getByEmail(@PathVariable String email);
 //}
 
-@FeignClient(value = "user-service")
+@FeignClient(value = "user-service-main")
 public interface UserServiceClient {
 
     @GetMapping("/api/v1/user/email/{email}")
-    ResponseEntity<UserResponse> getByEmail(@PathVariable String email);
+    ResponseEntity<GenericResponse<UserResponse>> getByEmail(@PathVariable String email);
 }
