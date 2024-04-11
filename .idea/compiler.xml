@@ -19,6 +19,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="garanti-service (1)" target="1.5" />
       <module name="kredinbizde-service" target="1.5" />
     </bytecodeTargetLevel>
   </component>

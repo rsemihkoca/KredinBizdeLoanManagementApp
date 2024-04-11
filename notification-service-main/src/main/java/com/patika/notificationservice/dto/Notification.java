@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @ToString
-public class NotificationDTO {
+public class Notification {
 
     private NotificationType notificationType;
     private String message;
