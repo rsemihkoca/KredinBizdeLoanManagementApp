@@ -1,5 +1,6 @@
 package com.patika.notificationservice.service;
 
+import com.patika.notificationservice.dto.Notification;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ public class NotificationService {
         this.notificationStrategy = notificationStrategy;
     }
 
-    public void sendNotification(String message) {
+    public void sendNotification(Notification message) {
         assert notificationStrategy != null;
         notificationStrategy.sendNotification(message);
     }
