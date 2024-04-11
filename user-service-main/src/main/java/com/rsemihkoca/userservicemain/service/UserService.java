@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.rsemihkoca.userservicemain.exceptions.dto.request.CreateUserRequest;
+import com.rsemihkoca.userservicemain.exceptions.dto.response.GenericResponse;
 import com.rsemihkoca.userservicemain.exceptions.dto.response.UserResponse;
 import com.rsemihkoca.userservicemain.model.Constants;
 import com.rsemihkoca.userservicemain.model.User;
@@ -30,12 +31,13 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    @Cacheable(value = Constants.userTable.TABLE_NAME, key = "#email")
+    @Cacheable(value = Constants.userTable.TABLE_NAME, key = "#email", unless = "#result == null")
     public UserResponse getByEmail(String email) {
         User getUser = userRepository.getUserByEmail(email);
-        log.info("User with " + email + " retrieved from database");
-        UserResponse userResponse = modelMapper.map(getUser, UserResponse.class);
-        return userResponse;
+        if (getUser == null) {
+            return null;
+        }
+        return modelMapper.map(getUser, UserResponse.class);
     }
 
     @CacheEvict(value = Constants.userTable.TABLE_NAME, allEntries = true)
@@ -45,10 +47,12 @@ public class UserService {
         log.info("User saved successfully");
         return modelMapper.map(savedUser, UserResponse.class);
     }
-    @Cacheable(value = Constants.userTable.TABLE_NAME, key = "#userId")
+    @Cacheable(value = Constants.userTable.TABLE_NAME, key = "#userId", unless = "#result == null")
     public UserResponse getById(Long userId) {
         User getUser = userRepository.getUserByUserId(userId);
-        log.info("User with " + userId + " retrieved from database");
+        if (getUser == null) {
+            return null;
+        }
         return modelMapper.map(getUser, UserResponse.class);
     }
     @Cacheable(value = Constants.userTable.TABLE_NAME)
