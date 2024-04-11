@@ -11,5 +11,8 @@ import java.util.List;
 @Repository
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
 
-    List<Application> findByUserEmail(String email);
+    List<Application> findByUserEmailAndIsActive(String userEmail, boolean isActive);
+
+
+    List<Application> findAllByIsActive(boolean isActive);
 }
