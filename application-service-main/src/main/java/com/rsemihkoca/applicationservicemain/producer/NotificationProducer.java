@@ -7,7 +7,6 @@ import com.rsemihkoca.applicationservicemain.producer.dto.Notification;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
@@ -22,7 +21,7 @@ public class NotificationProducer {
 
     private final ObjectMapper objectMapper;
 
-    @Value(value = "${spring.kafka.template.default-topic}")
+    @Value(value = "${spring.kafka.producer.notification-topic}")
     private String topicName;
 
     private final KafkaTemplate<String, String> kafkaTemplate;
