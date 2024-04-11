@@ -1,10 +1,10 @@
 package com.patika.notificationservice.listener;
 
-import com.patika.notificationservice.dto.NotificationDTO;
+import com.patika.notificationservice.dto.Notification;
 import com.patika.notificationservice.dto.enums.NotificationType;
 import com.patika.notificationservice.service.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -27,18 +27,17 @@ public class NotificationListener {
         this.mobileNotificationStrategy = mobileNotificationStrategy;
     }
 
-    @RabbitListener(queues = "${rabbitmq.queue}")
-    public void sendNotification(NotificationDTO notificationDTO) {
-        log.info("Notification received: {}", notificationDTO);
-        NotificationStrategy notificationStrategy = getNotificationType(notificationDTO);
-        String message = notificationDTO.getMessage();
+    @KafkaListener(topics = "${spring.kafka.producer.notification-topic}", groupId = "${spring.kafka.consumer.group-id}")
+    public void sendNotification(Notification notification) {
+        log.info("Notification received: {}", notification);
+        NotificationStrategy notificationStrategy = getNotificationType(notification);
         notificationService.setNotificationStrategy(notificationStrategy);
-        notificationService.sendNotification(message);
+        notificationService.sendNotification(notification);
 
     }
 
-    private NotificationStrategy getNotificationType(NotificationDTO notificationDTO) {
-        NotificationType notificationType = notificationDTO.getNotificationType();
+    private NotificationStrategy getNotificationType(Notification notification) {
+        NotificationType notificationType = notification.getNotificationType();
         return switch (notificationType) {
             case SMS -> smsNotificationStrategy;
             case EMAIL -> emailNotificationStrategy;
