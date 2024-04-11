@@ -44,4 +44,9 @@ public class UserController {
         throw new RuntimeException("test exception");
     }
 
+    @DeleteMapping("/{email}")
+    public ResponseEntity<GenericResponse<UserResponse>> deleteById(@PathVariable("email") String email) {
+        return ResponseEntity.ok(GenericResponse.success(userService.deleteByEmail(email)));
+    }
+
 }
