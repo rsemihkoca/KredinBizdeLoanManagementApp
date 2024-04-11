@@ -31,6 +31,8 @@ public class DataSyncScheduler {
     @Scheduled(fixedDelay = 60000) // 1 dakika
     public void syncDataToRedis() {
 
+        log.info("DataSyncScheduler is running...");
+
         List<MergedLoanResponse> data = new ArrayList<>();
         for(BankType bankType : BankType.values()) {
             GenericResponse<List<LoanResponse>> bank = clientFactory.createBankClient(bankType).getAll().getBody();
@@ -54,5 +56,7 @@ public class DataSyncScheduler {
 //                .toList();
 
         redisService.save(Constants.LOAN_CACHE, data);
+        log.info("DataSyncScheduler is finished...");
+
     }
 }
