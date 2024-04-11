@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 //    ResponseEntity<UserResponse> getByEmail(@PathVariable String email);
 //}
 
+//@FeignClient(value = "user-service-main", url = "http://localhost:8081")
 @FeignClient(value = "user-service-main")
 public interface UserServiceClient {
 
