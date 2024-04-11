@@ -5,7 +5,7 @@ spring:
     consumer:
       bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
       auto-offset-reset: earliest
-      group-id: consumer-1
+      group-id: logconsumer-service
     topic:
         name: kafka-log-topic
 
