@@ -3,27 +3,13 @@ server:
 spring:
   application:
     name: application-service-main
-#  rabbitmq:
-#    host: ${SPRING_RABBITMQ_HOST:localhost}
-#    port: ${SPRING_RABBITMQ_PORT:5672}
-#    username: ${SPRING_RABBITMQ_USERNAME:admin}
-#    password: ${SPRING_RABBITMQ_PASSWORD:123456}
-#    listener:
-#      simple:
-#        default-requeue-rejected: false
-#        concurrency: 3
-#        max-concurrency: 10
-#    template:
-#      exchange: patika.exchange
-#      routing-key: patika.routingkey
-#      default-receive-queue: patika.queue
 
   kafka:
     producer:
       acks: -1
       bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
-    template:
-      default-topic: kafka-log-topic
+      error-topic: kafka-log-topic
+      notification-topic: kafka-notification
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
@@ -44,9 +30,6 @@ spring:
     redis:
       host: ${SPRING_REDIS_HOST:localhost}
       port: ${SPRING_REDIS_PORT:6379}
-kafka:
-    topic:
-        name: kafka-log-topic
 eureka:
   client:
     serviceUrl:
