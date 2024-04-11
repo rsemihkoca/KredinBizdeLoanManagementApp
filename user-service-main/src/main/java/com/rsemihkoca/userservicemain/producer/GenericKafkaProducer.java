@@ -1,15 +1,14 @@
-package com.rsemihkoca.applicationservicemain.producer;
+package com.rsemihkoca.userservicemain.producer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rsemihkoca.applicationservicemain.producer.dto.Notification;
-import com.rsemihkoca.applicationservicemain.producer.dto.Transaction;
+import com.rsemihkoca.userservicemain.producer.dto.DeletedUser;
+import com.rsemihkoca.userservicemain.producer.dto.Transaction;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.common.serialization.Serializer;
 
 
 @Service
@@ -21,16 +20,16 @@ public class GenericKafkaProducer {
     @Value(value = "${spring.kafka.producer.error-topic}")
     private String errorTopicName;
 
-    @Value(value = "${spring.kafka.producer.notification-topic}")
-    private String notificationTopicName;
+    @Value(value = "${spring.kafka.producer.user-deletion-topic}")
+    private String userDeletionTopicName;
 
     public GenericKafkaProducer(KafkaTemplate<String, String> kafkaTemplate, ObjectMapper objectMapper) {
         this.kafkaTemplate = kafkaTemplate;
         this.objectMapper = objectMapper;
     }
 
-    public void sendNotification(Notification notification) {
-        send(notificationTopicName, notification);
+    public void sendUserDeletion(DeletedUser message) {
+        send(userDeletionTopicName, message);
     }
 
     public void sendTransaction(Transaction transaction) {
