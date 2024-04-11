@@ -24,7 +24,6 @@ public class KafkaConsumerListener {
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name}", groupId = "${spring.kafka.consumer.group-id}")
-//    @KafkaListener(topics = "${spring.kafka.topic.name}")
     public void listen(String message) {
         System.out.printf("Received Messasge: [%s] %n", message);
         try {
