@@ -26,6 +26,6 @@ WORKDIR /app
 COPY --from=builder /app/target/notification-service-main.jar /app
 
 # Expose the port the application runs on
-EXPOSE 8085
+EXPOSE 8082
 # Set the entry point to execute the jar
 ENTRYPOINT ["java", "-jar", "notification-service-main.jar"]
