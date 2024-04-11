@@ -12,7 +12,9 @@ public final class Constants {
     public static class applicationTable {
         public static final String TABLE_NAME = "APPLICATION";
         public static final String APPLICATION_ID = "APPLICATION_ID";
+        public static final String BANK_NAME = "BANK_NAME";
         public static final String IS_ACTIVE = "IS_ACTIVE";
+        public static final String APPLICATION_DATE = "APPLICATION_DATE";
         public static final String APPLICATION_STATUS = "APPLICATION_STATUS";
     }
 
