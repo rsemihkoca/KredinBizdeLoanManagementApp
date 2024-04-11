@@ -1,9 +1,13 @@
-package com.rsemihkoca.applicationservicemain.client;
+package com.rsemihkoca.bankservicemain.client;
 
 
-import com.rsemihkoca.applicationservicemain.dto.request.BankApplicationRequest;
-import com.rsemihkoca.applicationservicemain.dto.response.ApplicationResponse;
+import com.rsemihkoca.bankservicemain.dto.response.GenericResponse;
+import com.rsemihkoca.bankservicemain.dto.response.LoanResponse;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 public interface BankServiceClient {
-    ApplicationResponse createApplication(BankApplicationRequest request);
+    ResponseEntity<GenericResponse<List<LoanResponse>>> getAll();
 }
