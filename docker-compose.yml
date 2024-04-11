@@ -239,11 +239,6 @@ services:
       - SPRING_REDIS_HOST=redis
       - SPRING_REDIS_PORT=6379
 
-
-
-
-
-  
   logconsumer-service-main:
     image: logconsumer-service-main
     build:
