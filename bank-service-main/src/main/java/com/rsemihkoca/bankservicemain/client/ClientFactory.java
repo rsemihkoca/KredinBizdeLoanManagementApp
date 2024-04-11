@@ -1,25 +1,19 @@
-package com.rsemihkoca.applicationservicemain.client;
+package com.rsemihkoca.bankservicemain.client;
 
-import com.rsemihkoca.applicationservicemain.client.akbank.AkbankClient;
-import com.rsemihkoca.applicationservicemain.client.garanti.GarantiClient;
-//import com.rsemihkoca.applicationservicemain.client.userservice.UserClient;
-//import com.rsemihkoca.applicationservicemain.client.userservice.UserServiceClient;
-import com.rsemihkoca.applicationservicemain.dto.request.ApplicationRequest;
-import com.rsemihkoca.applicationservicemain.dto.request.BankApplicationRequest;
-import com.rsemihkoca.applicationservicemain.enums.BankType;
+import com.rsemihkoca.bankservicemain.client.akbank.AkbankServiceClient;
+import com.rsemihkoca.bankservicemain.client.garanti.GarantiServiceClient;
+import com.rsemihkoca.bankservicemain.enums.BankType;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
 @Scope(value = "singleton")
-public class ClientFactory {
-    private final GarantiClient garantiClient;
-    private final AkbankClient akbankClient;
+@AllArgsConstructor
+public class ClientFactory{
+    private final GarantiServiceClient garantiClient;
+    private final AkbankServiceClient akbankClient;
 
-    public ClientFactory(GarantiClient garantiClient, AkbankClient akbankClient) {
-        this.garantiClient = garantiClient;
-        this.akbankClient = akbankClient;
-    }
 
 //    private void sendApplication(ApplicationRequest request, User user) {
 //        BankType bankType = BankType.valueOf(request.getBankName().toUpperCase());
