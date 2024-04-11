@@ -1,4 +1,4 @@
-package com.rsemihkoca.applicationservicemain.dto.response;
+package com.rsemihkoca.userservicemain.exceptions.dto.response;
 
 
 import lombok.AllArgsConstructor;
