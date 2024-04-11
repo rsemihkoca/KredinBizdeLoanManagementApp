@@ -23,22 +23,6 @@ services:
     volumes:
       - redis-insight:/data
 
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    container_name: 'rabbitmq'
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    volumes:
-      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq/
-    networks:
-      - spring-boot
-    environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: 123456
-
-
   zookeeper:
     image: confluentinc/cp-zookeeper:5.5.0
     container_name: zookeeper
@@ -70,20 +54,6 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 100
     command: sh -c "((sleep 15 && kafka-topics --create --topic kafka-log-topic --bootstrap-server localhost:29092)&) && /etc/confluent/docker/run"
 
-#  kafka:
-#    image: confluentinc/cp-kafka:5.5.0
-#    container_name: kafka
-#    networks:
-#      - rmoff_kafka
-#    depends_on:
-#      - zookeeper
-#    environment:
-#      KAFKA_BROKER_ID: 1
-#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-#      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-#    command: sh -c "((sleep 15 && kafka-topics --create --topic kafka-log-topic --bootstrap-server localhost:9092)&) && /etc/confluent/docker/run"
-
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
     depends_on:
@@ -111,8 +81,6 @@ services:
       - ./initialize-mongo.js:/docker-entrypoint-initdb.d/01_initialize-mongo.js:ro
     networks:
       - spring-boot
-  #    healthcheck:
-  #      test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
 
 
   kredinbizde-discovery:
@@ -207,31 +175,9 @@ services:
     environment:
       - EUREKA_SERVER_URL=http://kredinbizde-discovery:8761/eureka
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=broker:29092
-      - MYSQL_DB_HOST=mysql-application-service
-
-
-  bank-service-main:
-    image: bank-service-main:latest
-    build:
-      context: ./bank-service-main
-      dockerfile: Dockerfile
-    ports:
-      - "8083:8083"
-    networks:
-      - spring-boot
-      - rmoff_kafka
-#      - bank-service-network
-    depends_on:
-      kredinbizde-discovery:
-        condition: service_healthy
-    environment:
-      - EUREKA_SERVER_URL=http://kredinbizde-discovery:8761/eureka
-      - SPRING_KAFKA_BOOTSTRAP_SERVERS=broker:29092
       - SPRING_REDIS_HOST=redis
       - SPRING_REDIS_PORT=6379
-#      - MYSQL_DB_HOST=mysql-user-service
-
-
+      - MYSQL_DB_HOST=mysql-application-service
 
   user-service-main:
     image: user-service-main:latest
@@ -253,6 +199,49 @@ services:
       - SPRING_REDIS_HOST=redis
       - SPRING_REDIS_PORT=6379
       - MYSQL_DB_HOST=mysql-user-service
+
+  notification-service-main:
+    image: notification-service-main:latest
+    build:
+      context: ./notification-service-main
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    networks:
+      - spring-boot
+      - rmoff_kafka
+    depends_on:
+      kredinbizde-discovery:
+        condition: service_healthy
+    environment:
+      - EUREKA_SERVER_URL=http://kredinbizde-discovery:8761/eureka
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=broker:29092
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+
+  bank-service-main:
+    image: bank-service-main:latest
+    build:
+      context: ./bank-service-main
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    networks:
+      - spring-boot
+      - rmoff_kafka
+#      - bank-service-network
+    depends_on:
+      kredinbizde-discovery:
+        condition: service_healthy
+    environment:
+      - EUREKA_SERVER_URL=http://kredinbizde-discovery:8761/eureka
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=broker:29092
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+
+
+
+
 
   
   logconsumer-service-main:
@@ -285,7 +274,7 @@ services:
       - mysql_appl_data:/var/lib/mysql
     networks:
       - application-service-network
-    entrypoint: [ "docker-entrypoint.sh", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci" ]
+#    entrypoint: [ "docker-entrypoint.sh", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci" ]
 
   mysql-user-service:
     image: mysql:8.0
@@ -300,7 +289,7 @@ services:
       - mysql_user_data:/var/lib/mysql
     networks:
       - user-service-network
-    entrypoint: [ "docker-entrypoint.sh", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci" ]
+#    entrypoint: [ "docker-entrypoint.sh", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci" ]
 
   mysql-akbank-service:
     image: mysql:8.0
@@ -315,7 +304,7 @@ services:
       - mysql_akbank_data:/var/lib/mysql
     networks:
       - akbank-service-network
-    entrypoint: [ "docker-entrypoint.sh", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci" ]
+#    entrypoint: [ "docker-entrypoint.sh", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci" ]
 
   mysql-garanti-service:
     image: mysql:8.0
@@ -330,7 +319,7 @@ services:
       - mysql_garanti_data:/var/lib/mysql
     networks:
       - garanti-service-network
-    entrypoint: [ "docker-entrypoint.sh", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci" ]
+#    entrypoint: [ "docker-entrypoint.sh", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci" ]
 
 
 volumes:
