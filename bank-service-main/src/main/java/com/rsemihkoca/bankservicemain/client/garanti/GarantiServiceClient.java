@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 
-@FeignClient(value = "garanti-service-main")
+@FeignClient(value = "garanti-service")
 public interface GarantiServiceClient extends BankServiceClient {
 
     @GetMapping("garanti/v1/api/loan")
