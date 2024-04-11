@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 
-@FeignClient(name = "bank-service")
+@FeignClient(name = "bank-service-main")
 public interface BankServiceClient {
 
     @GetMapping("/api/v1/loan")
