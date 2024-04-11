@@ -13,8 +13,6 @@ import java.time.Duration;
 
 @Configuration
 public class BeanConfiguration {
-
-
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper mapper = new ModelMapper();
