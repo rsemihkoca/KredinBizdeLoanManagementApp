@@ -26,7 +26,6 @@ public class Loan implements Serializable {
     @Column(name = LoanTable.ID)
     private Long id;
 
-
     @Column(name = LoanTable.CREATE_DATE)
     private LocalDateTime createDate;
 
