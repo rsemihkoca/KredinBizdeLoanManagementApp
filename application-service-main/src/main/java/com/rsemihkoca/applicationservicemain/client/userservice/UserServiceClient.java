@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(value = "user-service-main", url = "http://localhost:8081")
-//@FeignClient(value = "user-service-main")
+//@FeignClient(value = "user-service-main", url = "http://localhost:8081")
+@FeignClient(value = "user-service-main")
 public interface UserServiceClient {
 
     @GetMapping("/api/v1/user/email/{email}")
