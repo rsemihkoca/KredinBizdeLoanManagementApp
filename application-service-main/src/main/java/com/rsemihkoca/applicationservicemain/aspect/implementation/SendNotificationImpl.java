@@ -1,43 +1,46 @@
 package com.rsemihkoca.applicationservicemain.aspect.implementation;
 
-import com.rsemihkoca.applicationservicemain.model.ApplicationPipeline;
-import com.rsemihkoca.applicationservicemain.service.ApplicationService;
+import com.rsemihkoca.applicationservicemain.dto.request.interfaces.CanSendNotification;
+import com.rsemihkoca.applicationservicemain.enums.NotificationContent;
+import com.rsemihkoca.applicationservicemain.listener.KafkaConsumerListener;
+import com.rsemihkoca.applicationservicemain.producer.GenericKafkaProducer;
+import com.rsemihkoca.applicationservicemain.producer.dto.Notification;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.springframework.core.annotation.Order;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-
+import com.rsemihkoca.applicationservicemain.aspect.signature.SendNotification;
 
 @Aspect
 @Component
 @Slf4j
 @AllArgsConstructor
-@Order(value = 3)
-public class CheckApplicationAbsenceImpl {
+public class SendNotificationImpl {
 
-    private final ApplicationPipeline applicationPipeline;
-    private final ApplicationService applicationService;
+    private final GenericKafkaProducer genericKafkaProducer;
+    private final KafkaConsumerListener kafkaConsumerListener;
 
-    @Before("@annotation(com.rsemihkoca.applicationservicemain.aspect.signature.CheckApplicationAbsence) && execution(* *(..))")
-    public void checkApplicationAbsence(JoinPoint joinPoint) {
-        Long loanId = applicationPipeline.getCurrentLoanRequest().getLoanId();
-        String userEmail = applicationPipeline.getCurrentUserEmail();
-
-        if (userEmail == null || loanId == null) {
-            throw new RuntimeException("User email or loan id is null");
-        }
-        getExistingApplication(userEmail, loanId);
-
+    //    @AfterReturning(
+//            value = "@annotation(com.rsemihkoca.applicationservicemain.aspect.signature.SendNotification) && execution(* *(..))",
+//            returning = "response"
+//    )
+//    public <T extends CanSendNotification> void sendNotification(T response) {
+//        Notification notification = response.getNotification(sendNotification.content());
+//        genericKafkaProducer.sendNotification(notification);
+//    }
+    @Pointcut("@annotation(sendNotification)")
+    public void sendNotificationPointcut(SendNotification sendNotification) {
     }
 
-    private void getExistingApplication(String userEmail, Long loanId) {
-        Object existingApplication = applicationService.getApplicationByUserEmailAndLoanId(userEmail, loanId);
-        if (existingApplication != null) {
-            throw new RuntimeException("There is already an active application for this loan");
-        }
+    @AfterReturning(pointcut = "sendNotificationPointcut(sendNotification)", returning = "response", argNames = "sendNotification,response")
+    public void sendNotificationAdvice(SendNotification sendNotification, Object response) {
+        NotificationContent content = sendNotification.content();
+        Notification notification = ((CanSendNotification) response).getNotification(content);
+        genericKafkaProducer.sendNotification(notification);
     }
 }
+
 
