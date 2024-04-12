@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<GenericResponse<ExceptionResponse>> handleAllException(Exception exception) {
-        log.error("exception occurred. {0}", exception.getCause());
+        log.error("exception occurred. {}", exception.getMessage());
         genericKafkaProducer.sendTransaction(prepareTransaction(exception));
 
         GenericResponse<ExceptionResponse> response = GenericResponse.error(prepareExceptionResponse(exception));
