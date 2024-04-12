@@ -44,8 +44,8 @@ public class ApplicationService {
         MergedLoanResponse loan = getLoan(request);
         log.info("Loan found");
 
-        // check if there is an active application for this user for same loan
-        // :TODO
+        getExistingApplication(userEmail, loan);
+        log.info("Active application not found");
 
         Application newApplication = getNewApplication(request, userEmail, loan.getLoanId());
         Application savedApplication = applicationRepository.save(newApplication);
@@ -55,6 +55,13 @@ public class ApplicationService {
         applicationResponse.setMergedLoanResponse(loan);
 
         return applicationResponse;
+    }
+
+    private void getExistingApplication(String userEmail, MergedLoanResponse loan) {
+        Application existingApplication = applicationRepository.findActiveApplicationByUserEmailAndLoanId(userEmail, loan.getLoanId());
+        if (existingApplication != null) {
+            throw new RuntimeException("There is already an active application for this loan");
+        }
     }
 
     private static Application getNewApplication(ApplicationRequest request, String userEmail, Long loanId) {
