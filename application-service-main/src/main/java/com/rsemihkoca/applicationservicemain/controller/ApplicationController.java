@@ -1,15 +1,17 @@
 package com.rsemihkoca.applicationservicemain.controller;
 
-import com.rsemihkoca.applicationservicemain.dto.request.ApplicationRequest;
+import com.rsemihkoca.applicationservicemain.dto.request.CreateApplicationRequest;
 import com.rsemihkoca.applicationservicemain.dto.response.ApplicationResponse;
 import com.rsemihkoca.applicationservicemain.dto.response.GenericResponse;
+import com.rsemihkoca.applicationservicemain.model.Constants;
 import com.rsemihkoca.applicationservicemain.service.ApplicationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -20,8 +22,8 @@ public class ApplicationController {
     private final ApplicationService applicationService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<GenericResponse<ApplicationResponse>> createApplication(@RequestBody ApplicationRequest request) {
+    @CacheEvict(value = Constants.applicationTable.TABLE_NAME, allEntries = true)
+    public ResponseEntity<GenericResponse<ApplicationResponse>> createApplication(@RequestBody CreateApplicationRequest request) {
         return ResponseEntity.ok(GenericResponse.success(applicationService.createApplication(request)));
     }
 
@@ -31,6 +33,7 @@ public class ApplicationController {
     }
 
     @GetMapping("/")
+    @Cacheable(value = Constants.applicationTable.TABLE_NAME)
     public ResponseEntity<GenericResponse<List<ApplicationResponse>>> getAll() {
         return ResponseEntity.ok(GenericResponse.success(applicationService.getAll()));
     }
