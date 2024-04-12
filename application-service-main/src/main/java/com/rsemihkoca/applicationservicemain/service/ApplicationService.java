@@ -15,6 +15,8 @@ import com.rsemihkoca.applicationservicemain.repository.ApplicationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import com.rsemihkoca.applicationservicemain.dto.request.CreateApplicationRequest;
 
@@ -35,6 +37,7 @@ public class ApplicationService {
     @CheckLoanExistence
     @CheckApplicationAbsence
     @SendNotification(content = NotificationContent.APPLICATION_CREATED)
+    @CacheEvict(value = Constants.applicationTable.TABLE_NAME, allEntries = true)
     public ApplicationResponse createApplication(CreateApplicationRequest request) {
         String userEmail = applicationPipeline.getCurrentUserEmail();
         MergedLoanResponse loan = applicationPipeline.getCurrentLoanRequest();
@@ -67,6 +70,7 @@ public class ApplicationService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(value = Constants.applicationTable.TABLE_NAME)
     public List<ApplicationResponse> getAll() {
         List<Application> applications = applicationRepository.findAllActiveApplications();
 
