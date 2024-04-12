@@ -1,10 +1,13 @@
 package com.rsemihkoca.applicationservicemain.service;
 
 
-import com.rsemihkoca.applicationservicemain.client.bankservice.BankServiceClient;
-import com.rsemihkoca.applicationservicemain.client.userservice.UserServiceClient;
+import com.rsemihkoca.applicationservicemain.aspect.signature.CheckApplicationAbsence;
+import com.rsemihkoca.applicationservicemain.aspect.signature.CheckLoanExistence;
+import com.rsemihkoca.applicationservicemain.aspect.signature.CheckUserExistence;
+import com.rsemihkoca.applicationservicemain.aspect.signature.SendNotification;
 import com.rsemihkoca.applicationservicemain.dto.response.*;
 import com.rsemihkoca.applicationservicemain.enums.*;
+import com.rsemihkoca.applicationservicemain.model.ApplicationPipeline;
 import com.rsemihkoca.applicationservicemain.model.*;
 import com.rsemihkoca.applicationservicemain.producer.*;
 import com.rsemihkoca.applicationservicemain.producer.dto.Notification;
@@ -12,15 +15,11 @@ import com.rsemihkoca.applicationservicemain.repository.ApplicationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import com.rsemihkoca.applicationservicemain.dto.request.ApplicationRequest;
+import com.rsemihkoca.applicationservicemain.dto.request.CreateApplicationRequest;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,42 +28,27 @@ import java.util.stream.Collectors;
 public class ApplicationService {
 
     private final ApplicationRepository applicationRepository;
-    private final UserServiceClient userServiceClient;
-    private final BankServiceClient bankServiceClient;
-    private final GenericKafkaProducer genericKafkaProducer;
-
+    private final ApplicationPipeline applicationPipeline;
     private final ModelMapper modelMapper;
 
-    @CacheEvict(value = Constants.applicationTable.TABLE_NAME, allEntries = true)
-    public ApplicationResponse createApplication(ApplicationRequest request) {
-
-        String userEmail = getUser(request);
-        log.info("User found");
-
-        MergedLoanResponse loan = getLoan(request);
-        log.info("Loan found");
-
-        getExistingApplication(userEmail, loan);
-        log.info("Active application not found");
+    @CheckUserExistence
+    @CheckLoanExistence
+    @CheckApplicationAbsence
+    @SendNotification(content = NotificationContent.APPLICATION_CREATED)
+    public ApplicationResponse createApplication(CreateApplicationRequest request) {
+        String userEmail = applicationPipeline.getCurrentUserEmail();
+        MergedLoanResponse loan = applicationPipeline.getCurrentLoanRequest();
 
         Application newApplication = getNewApplication(request, userEmail, loan.getLoanId());
         Application savedApplication = applicationRepository.save(newApplication);
 
-        sendNotification(savedApplication, NotificationContent.APPLICATION_CREATED);
         ApplicationResponse applicationResponse = modelMapper.map(savedApplication, ApplicationResponse.class);
         applicationResponse.setMergedLoanResponse(loan);
 
         return applicationResponse;
     }
 
-    private void getExistingApplication(String userEmail, MergedLoanResponse loan) {
-        Application existingApplication = applicationRepository.findActiveApplicationByUserEmailAndLoanId(userEmail, loan.getLoanId());
-        if (existingApplication != null) {
-            throw new RuntimeException("There is already an active application for this loan");
-        }
-    }
-
-    private static Application getNewApplication(ApplicationRequest request, String userEmail, Long loanId) {
+    private static Application getNewApplication(CreateApplicationRequest request, String userEmail, Long loanId) {
         return Application.builder()
                 .userEmail(userEmail)
                 .loanId(loanId)
@@ -75,45 +59,7 @@ public class ApplicationService {
                 .build();
     }
 
-    private MergedLoanResponse getLoan(ApplicationRequest request) {
-        Long loanId = request.getLoanId();
-        String bank = request.getBankName().toUpperCase();
-        GenericResponse<List<MergedLoanResponse>> loanResponse = bankServiceClient.getAll().getBody();
-        // check if this loan id and bank is in the list
-        if (loanResponse == null) {
-            throw new RuntimeException("BankService returned empty response");
-        }
-        List<MergedLoanResponse> data = loanResponse.getData();
-        return data.stream()
-                .filter(loan -> loan.getLoanId().equals(loanId) && loan.getBankName().toUpperCase().equals(bank))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Loan not found"));
-    }
-
-    private String getUser(ApplicationRequest request) {
-        String email = request.getEmail();
-        ResponseEntity<GenericResponse<UserResponse>> user = userServiceClient.getByEmail(email);
-        if (Objects.requireNonNull(user.getBody()).getData() == null) {
-            throw new RuntimeException("User not found");
-        }
-        return user.getBody().getData().getEmail();
-    }
-
-
-
-    private void sendNotification(Application application, NotificationContent content) {
-        Notification notification = getNotification(application, content);
-        genericKafkaProducer.sendNotification(notification);
-    }
-
-    private Notification getNotification(Application application, NotificationContent content) {
-        return Notification.builder()
-                .notificationType(NotificationType.EMAIL)
-                .channel(application.getUserEmail())
-                .message(content.toString())
-                .build();
-    }
-
+    @CheckUserExistence
     public List<ApplicationResponse> getByEmail(String email) {
         List<Application> applications = applicationRepository.findActiveApplicationsByUserEmail(email);
         return applications.stream()
@@ -121,13 +67,16 @@ public class ApplicationService {
                 .collect(Collectors.toList());
     }
 
-    @Cacheable(value = Constants.applicationTable.TABLE_NAME)
     public List<ApplicationResponse> getAll() {
         List<Application> applications = applicationRepository.findAllActiveApplications();
 
         return applications.stream()
                 .map(application -> modelMapper.map(application, ApplicationResponse.class))
                 .collect(Collectors.toList());
+    }
+
+    public Application getApplicationByUserEmailAndLoanId(String userEmail, Long loanId) {
+        return applicationRepository.findActiveApplicationByUserEmailAndLoanId(userEmail, loanId);
     }
 
     public Integer deactivateApplicationsByUserEmail(String email) {
