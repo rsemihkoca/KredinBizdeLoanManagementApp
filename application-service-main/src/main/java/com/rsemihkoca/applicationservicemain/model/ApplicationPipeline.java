@@ -1,4 +1,4 @@
-package com.rsemihkoca.applicationservicemain.interceptor.pipeline;
+package com.rsemihkoca.applicationservicemain.model;
 
 
 import com.rsemihkoca.applicationservicemain.dto.response.MergedLoanResponse;
