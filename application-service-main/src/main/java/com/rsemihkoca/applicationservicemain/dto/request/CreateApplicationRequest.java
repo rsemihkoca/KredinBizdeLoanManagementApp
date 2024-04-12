@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 @Builder
-public class ApplicationRequest {
+public class CreateApplicationRequest extends AbstractApplicationRequest {
 
     @NotBlank(message = "Name cannot be blank")
     private String email;
