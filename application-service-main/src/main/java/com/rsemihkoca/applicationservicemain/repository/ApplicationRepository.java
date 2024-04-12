@@ -16,6 +16,9 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
     @Query("SELECT a FROM Application a WHERE a.isActive = true AND a.userEmail = :email")
     List<Application> findActiveApplicationsByUserEmail(@Param("email") String userEmail);
 //
+    @Query("SELECT a FROM Application a WHERE a.isActive = true AND a.userEmail = :email AND a.loanId = :loanId")
+    Application findActiveApplicationByUserEmailAndLoanId(@Param("email") String userEmail, @Param("loanId") Long loanId);
+
     @Query("SELECT a FROM Application a WHERE a.isActive = true")
     List<Application> findAllActiveApplications();
 
