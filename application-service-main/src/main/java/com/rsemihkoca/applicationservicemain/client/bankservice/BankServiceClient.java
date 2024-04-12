@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 
-//@FeignClient(name = "bank-service-main", url = "http://localhost:8083")
-@FeignClient(name = "bank-service-main")
+@FeignClient(name = "bank-service-main", url = "http://localhost:8083")
+//@FeignClient(name = "bank-service-main")
 public interface BankServiceClient {
 
     @GetMapping("/api/v1/loan")
