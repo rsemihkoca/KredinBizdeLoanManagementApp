@@ -11,6 +11,9 @@ import static com.rsemihkoca.userservicemain.model.Constants.*;
 @Entity
 @Data
 @Table(name = userTable.TABLE_NAME)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements Serializable {
 
     @Id
