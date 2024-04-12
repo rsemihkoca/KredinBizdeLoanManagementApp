@@ -9,6 +9,9 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name = addressTable.TABLE_NAME)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address implements Serializable {
 
     @Id
