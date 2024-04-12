@@ -22,7 +22,6 @@ public class ApplicationController {
     private final ApplicationService applicationService;
 
     @PostMapping
-    @CacheEvict(value = Constants.applicationTable.TABLE_NAME, allEntries = true)
     public ResponseEntity<GenericResponse<ApplicationResponse>> createApplication(@RequestBody CreateApplicationRequest request) {
         return ResponseEntity.ok(GenericResponse.success(applicationService.createApplication(request)));
     }
@@ -33,7 +32,6 @@ public class ApplicationController {
     }
 
     @GetMapping("/")
-    @Cacheable(value = Constants.applicationTable.TABLE_NAME)
     public ResponseEntity<GenericResponse<List<ApplicationResponse>>> getAll() {
         return ResponseEntity.ok(GenericResponse.success(applicationService.getAll()));
     }
