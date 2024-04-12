@@ -1,6 +1,6 @@
 package com.rsemihkoca.applicationservicemain.dto.request.interfaces;
 
-public interface hasEmail {
+public interface HasEmail {
 
     String getEmail();
 
