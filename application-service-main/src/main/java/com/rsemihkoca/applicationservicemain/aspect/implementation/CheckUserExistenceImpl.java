@@ -1,7 +1,7 @@
 package com.rsemihkoca.applicationservicemain.aspect.implementation;
 
 import com.rsemihkoca.applicationservicemain.client.userservice.UserServiceClient;
-import com.rsemihkoca.applicationservicemain.dto.request.interfaces.hasEmail;
+import com.rsemihkoca.applicationservicemain.dto.request.interfaces.HasEmail;
 import com.rsemihkoca.applicationservicemain.dto.response.GenericResponse;
 import com.rsemihkoca.applicationservicemain.dto.response.UserResponse;
 import com.rsemihkoca.applicationservicemain.model.ApplicationPipeline;
@@ -32,7 +32,7 @@ public class CheckUserExistenceImpl {
             // search for email in the request arguments
             for (Object arg : args) {
 
-                if (arg instanceof hasEmail request) {
+                if (arg instanceof HasEmail request) {
                     String email = request.getEmail();
                     findUserByEmail(email);
                 } else if (arg instanceof String email) {
