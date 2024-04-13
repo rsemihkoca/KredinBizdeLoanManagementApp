@@ -40,6 +40,7 @@ docker-compose down -v --remove-orphans && docker-compose up
 
 ![Adsız-2024-04-07-1353.png](.github%2Fassets%2FAds%C4%B1z-2024-04-07-1353.png)
 
+- Calculation Servis yapılmadı.
 - En dışarıda bulunan gateway servisi, tüm istekleri karşılar ve ilgili servislere yönlendirir.
 - Discovery servisi, tüm servislerin kayıtlı olduğu servistir. FeignClient ile servisler arası iletişimi sağlar.
 - User servisi, kullanıcılarla ilgili işlemleri yapar.
