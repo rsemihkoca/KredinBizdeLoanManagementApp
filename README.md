@@ -141,6 +141,162 @@ Retrieve all active loan applications by user email. Deactivated applications ar
 #### Description:
 Health check endpoint for the application service.
 
+## User Service[:8081]
+
+- User servisi, kullanıcılarla ilgili işlemleri yapar.
+
+### Create User
+<table>
+<thead>
+    <tr>
+      <th width="200px">Method</th>
+      <th width="800px">Path </th>
+    </tr>
+</thead>
+<tbody>
+  <tr width="600px">
+    <td align="center">POST    </td>
+    <td  align="center">/api/v1/user</td>
+  </tr>
+</table>
+
+#### Description:
+Creates a user. Example request body:
+
+```json
+{
+  "name": "string",
+  "age": 18,
+  "email": "string",
+  "address": {
+    "addressTitle": "string",
+    "addressDescription": "string"
+  }
+}
+```
+
+### Get All Users
+<table>
+<thead>
+    <tr>
+      <th width="200px">Method</th>
+      <th width="800px">Path </th>
+    </tr>
+</thead>
+<tbody>
+  <tr width="600px">
+    <td align="center">GET    </td>
+    <td  align="center">/api/v1/user/</td>
+  </tr>
+</table>
+
+#### Description:
+Retrieve all users.
+
+### Get User Detail By User Id
+<table>
+<thead>
+    <tr>
+      <th width="200px">Method</th>
+      <th width="800px">Path </th>
+    </tr>
+</thead>
+<tbody>
+  <tr width="600px">
+    <td align="center">GET    </td>
+    <td  align="center">/api/v1/user/{userId}</td>
+  </tr>
+</table>
+
+#### Description:
+Retrieve user detail by user id.
+
+
+### Delete User By User Email
+<table>
+<thead>
+    <tr>
+      <th width="200px">Method</th>
+      <th width="800px">Path </th>
+    </tr>
+</thead>
+<tbody>
+  <tr width="600px">
+    <td align="center">DELETE    </td>
+    <td  align="center">/api/v1/user/{email}</td>
+  </tr>
+</table>
+
+#### Description:
+Delete user by user email.
+
+
+### Health Check
+<table>
+<thead>
+    <tr>
+      <th width="200px">Method</th>
+      <th width="800px">Path </th>
+    </tr>
+</thead>
+<tbody>
+  <tr width="600px">
+    <td align="center">GET    </td>
+    <td  align="center">/actuator/health</td>
+  </tr>
+</table>
+
+#### Description:
+Health check endpoint for the application service.
+
+## Notification Service[:8082]
+
+- Notification servisi, kullanıcılara bildirim gönderir. Strategy pattern kullanılarak mail ve sms gönderimi yapılır.
+
+## Bank Service[:8083]
+
+- Bank servisi, bankaların sunduğu kredilerin güncel listesini tutar.
+
+### Get All Loans
+<table>
+<thead>
+    <tr>
+      <th width="200px">Method</th>
+      <th width="800px">Path </th>
+    </tr>
+</thead>
+<tbody>
+  <tr width="600px">
+    <td align="center">GET    </td>
+    <td  align="center">/api/v1/loan/</td>
+  </tr>
+</table>
+
+#### Description:
+Retrieve all active loans.
+
+### Health Check
+<table>
+<thead>
+    <tr>
+      <th width="200px">Method</th>
+      <th width="800px">Path </th>
+    </tr>
+</thead>
+<tbody>
+  <tr width="600px">
+    <td align="center">GET    </td>
+    <td  align="center">/actuator/health</td>
+  </tr>
+</table>
+
+#### Description:
+Health check endpoint for the application service.
+
+## Log Consumer Service[:8084]
+
+- Kafka ile asenkron mesajlaşmayı sağlar. Kafka'dan gelen mesajları dinler ve MongoDB'ye loglar.
+
 
 ## Lessons Learned
 - Servisleri docker içine taşıdıktan sonra bir türlü davranış değişmiyorsa image'i silmek gerekli Örneğin gateway bir türlü bağlayamadıysanız ve intellij kullanıyorsanız services altındaki images temizlemek çözüm olabilir. veya endpointleri temizlediğinizde swagger'a yansımıyorsa aynı şekilde imajları temizlemek çözüm olabilir. Bu davranışın sebebi dockerfile'ların cachelenmesi ancak servis sayım fazla olduğu için böyle yapmak zorundaydım diğer türlü multi-stage dockerfile'ları single stage yapıp belleği yormak zorunda kalacaktım.
@@ -175,4 +331,4 @@ Demo videosu eklendi.
 - **Uygulamaların dockerize edilmesi ve docker compose dosyası yazılması. `(10 PUAN)`** \
 Dockerize edildi ve docker-compose dosyası yazıldı.
 - Design Pattern kullanımı. `(10 PUAN)`\
-  Interceptor, Builder pattern, Singleton pattern, Interface Segregation Principle, Dependency Injection kullanıldı.
+  Interceptor, Strategy, Builder pattern, Singleton pattern, Interface Segregation Principle, Dependency Injection kullanıldı.
