@@ -45,6 +45,12 @@ public class CheckUserExistenceImpl {
 
     private void findUserByEmail(String email) {
         ResponseEntity<GenericResponse<UserResponse>> user = userServiceClient.getByEmail(email);
+        if(user.getBody() == null) {
+            throw new RuntimeException("User not found");
+        }
+        if (user.getBody().getData() == null) {
+            throw new RuntimeException("User not found");
+        }
         if (user.getBody().getData().getEmail() != null) {
             log.info("User found");
             applicationPipeline.setCurrentUserEmail(email);
