@@ -4,7 +4,7 @@
 ## Demonstration
 
 * [Mimari Özet 5 dk](https://www.loom.com/share/c443cd3be6b144089cc2333bdbf383e6?sid=149856d1-58a1-4931-8836-c7214fa4b4fb)
-* [Kullanım-1 5 dk](https://www.loom.com/share/c443cd3be6b144089cc2333bdbf383e6?sid=149856d1-58a1-4931-8836-c7214fa4b4fb)
+* [Kullanım-1 5 dk](https://www.loom.com/share/80afb6cfa8d64ab1874c479a7c2f7edc?sid=534bd78b-8498-417d-b789-334494090c90)
 * [Kullanım-2 5 dk](https://www.loom.com/share/04f3262a4cdb46cf87cb0b884db0ad17?sid=6f92a892-b0d6-4d9a-9d35-eb0bf0680743)
 
 
