@@ -21,6 +21,7 @@ Dockerize edildi ve docker-compose dosyası yazıldı.
 - Design Pattern kullanımı. `(10 PUAN)`\
 Builder pattern, Singleton pattern, Interface Segregation Principle, Dependency Injection, Interceptor kullanıldı.
 
+![Adsız-2024-04-07-1353.png](.github%2Fassets%2FAds%C4%B1z-2024-04-07-1353.png)
 
 - servisleri docker içine taşıdıktan sonra bir türlü davranış değişmiyorsa image'i silmek gerekli Örneğin gateway bir türlü bağlayamadıysanız ve intellij kullanıyorsanız services altındaki images temizlemek çözüm olabilir. veya endpointleri temizlediğinizde swagger'a yansımıyorsa aynı şekilde imajları temizlemek çözüm olabilir.
 - kafka'yı bu makaleye borçluyum: https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
